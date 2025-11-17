@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-g">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reilin Joey - Filmmaker & Director</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Inter font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        /* Apply Inter font */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #000;
+            color: #f3f4f6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        /* Custom styles for grid image hover effect (zoom) */
+        .group:hover .group-hover\:scale-110 {
+            transform: scale(1.1);
+        }
+        /* Custom styles for hero logos */
+        .logo-grid img {
+            filter: brightness(0) invert(1);
+            opacity: 0.6;
+            transition: opacity 0.3s ease;
+        }
+        .logo-grid img:hover {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="bg-black text-gray-100">
+
+    <!-- Header -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-black bg-opacity-80 backdrop-blur-md">
+        <nav class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-5">
+            <div class="flex justify-between items-center">
+                <!-- Logo -->
+                <a href="#" class="text-3xl font-black tracking-tighter">RJ</a>
+                
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#" class="text-sm font-medium text-gray-300 hover:text-white transition-colors">HOME</a>
+                    <a href="#" class="text-sm font-medium text-gray-300 hover:text-white transition-colors">STORE</a>
+                    <a href="#" class="text-sm font-medium text-gray-300 hover:text-white transition-colors">CONTACT</a>
+                    <a href="#" class="bg-white text-black px-5 py-2 rounded-full text-sm font-medium hover:bg-gray-200 transition-colors">
+                        Join the Community
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-white focus:outline-none">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Mobile Menu (Hidden by default) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-black py-4">
+            <a href="#" class="block text-center text-gray-300 hover:text-white py-2">HOME</a>
+            <a href="#" class="block text-center text-gray-300 hover:text-white py-2">STORE</a>
+            <a href="#" class="block text-center text-gray-300 hover:text-white py-2">CONTACT</a>
+            <a href="#" class="block text-center w-3/4 mx-auto mt-2 bg-white text-black px-5 py-2 rounded-full text-sm font-medium hover:bg-gray-200 transition-colors">
+                Join the Community
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="h-screen min-h-[700px] flex flex-col justify-center items-center text-center pt-16 px-4">
+            <div class="flex-grow flex flex-col justify-center items-center">
+                <h1 class="text-6xl md:text-9xl font-black tracking-tighter">REILIN JOEY</h1>
+                <p class="text-xl md:text-2xl font-medium text-gray-400 mt-4 tracking-wide">FILMMAKER — AVAILABLE WORLDWIDE</p>
+            </div>
+            <!-- Client Logos -->
+            <div class="w-full max-w-5xl mx-auto pb-12">
+                <div class="logo-grid grid grid-cols-3 sm:grid-cols-6 gap-8 items-center px-4">
+                    <img src="https://placehold.co/100x40/000000/FFFFFF?text=Audi" alt="Audi Logo" class="w-24 h-auto mx-auto" onerror="this.src='https://placehold.co/100x40/000/FFF?text=Audi'">
+                    <img src="https://placehold.co/100x40/000000/FFFFFF?text=Ferrari" alt="Ferrari Logo" class="w-24 h-auto mx-auto" onerror="this.src='https://placehold.co/100x40/000/FFF?text=Ferrari'">
+                    <img src="https://placehold.co/100x40/000000/FFFFFF?text=Sony" alt="Sony Logo" class="w-24 h-auto mx-auto" onerror="this.src='https://placehold.co/100x40/000/FFF?text=Sony'">
+                    <img src="https://placehold.co/100x40/000000/FFFFFF?text=DJI" alt="DJI Logo" class="w-24 h-auto mx-auto" onerror="this.src='https://placehold.co/100x40/000/FFF?text=DJI'">
+                    <img src="https://placehold.co/100x40/000000/FFFFFF?text=Apple+Music" alt="Apple Music Logo" class="w-24 h-auto mx-auto" onerror="this.src='https://placehold.co/100x40/000/FFF?text=Apple+Music'">
+                    <img src="https://placehold.co/100x40/000000/FFFFFF?text=Polestar" alt="Polestar Logo" class="w-24 h-auto mx-auto" onerror="this.src='https://placehold.co/100x40/000/FFF?text=Polestar'">
+                </div>
+            </div>
+        </section>
+
+        <!-- Motion (Portfolio) Section -->
+        <section id="motion" class="py-16 md:py-24">
+            <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                <h2 class="text-4xl md:text-5xl font-black tracking-tighter mb-12">MOTION</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-12">
+                    <!-- Project Item 1 -->
+                    <a href="#" class="group block">
+                        <div class="overflow-hidden rounded-lg">
+                            <img src="https://placehold.co/800x450/111111/333333?text=DJI+RS3+LAUNCH" 
+                                 alt="DJI - RS3 LAUNCH FILM" 
+                                 class="w-full h-auto object-cover transform transition-transform duration-500 ease-in-out group-hover:scale-110"
+                                 onerror="this.src='https://placehold.co/800x450/111/333?text=Project+Thumbnail'">
+                        </div>
+                        <h3 class="text-xl font-bold mt-4">DJI - RS3 LAUNCH FILM</h3>
+                        <p class="text-gray-400 text-sm">SHORT FILM</p>
+                    </a>
+                    <!-- Project Item 2 -->
+                    <a href="#" class="group block">
+                        <div class="overflow-hidden rounded-lg">
+                            <img src="https://placehold.co/800x450/111111/333333?text=SONY+ZV-E1" 
+                                 alt="SONY ZV-E1 LAUNCH FILM" 
+                                 class="w-full h-auto object-cover transform transition-transform duration-500 ease-in-out group-hover:scale-110"
+                                 onerror="this.src='https://placehold.co/800x450/111/333?text=Project+Thumbnail'">
+                        </div>
+                        <h3 class="text-xl font-bold mt-4">SONY ZV-E1 LAUNCH FILM</h3>
+                        <p class="text-gray-400 text-sm">COMMERCIAL</p>
+                    </a>
+                    <!-- Project Item 3 -->
+                    <a href="#" class="group block">
+                        <div class="overflow-hidden rounded-lg">
+                            <img src="https://placehold.co/800x450/111111/333333?text=SHOWREEL+2022" 
+                                 alt="SHOWREEL 2022" 
+                                 class="w-full h-auto object-cover transform transition-transform duration-500 ease-in-out group-hover:scale-110"
+                                 onerror="this.src='https://placehold.co/800x450/111/333?text=Project+Thumbnail'">
+                        </div>
+                        <h3 class="text-xl font-bold mt-4">SHOWREEL 2022</h3>
+                        <p class="text-gray-400 text-sm">REEL</p>
+                    </a>
+                    <!-- Project Item 4 -->
+                    <a href="#" class="group block">
+                        <div class="overflow-hidden rounded-lg">
+                            <img src="https://placehold.co/800x450/111111/333333?text=FERRARI+PARIS" 
+                                 alt="FERRARI PARIS - OPENING FILM" 
+                                 class="w-full h-auto object-cover transform transition-transform duration-500 ease-in-out group-hover:scale-110"
+                                 onerror="this.src='https://placehold.co/800x450/111/333?text=Project+Thumbnail'">
+                        </div>
+                        <h3 class="text-xl font-bold mt-4">FERRARI PARIS - OPENING FILM</h3>
+                        <p class="text-gray-400 text-sm">BRANDED CONTENT</p>
+                    </a>
+                    <!-- Project Item 5 -->
+                    <a href="#" class="group block">
+                        <div class="overflow-hidden rounded-lg">
+                            <img src="https://placehold.co/800x450/111111/333333?text=AUDI+x+LPC" 
+                                 alt="AUDI x LPC" 
+                                 class="w-full h-auto object-cover transform transition-transform duration-500 ease-in-out group-hover:scale-110"
+                                 onerror="this.src='https://placehold.co/800x450/111/333?text=Project+Thumbnail'">
+                        </div>
+                        <h3 class="text-xl font-bold mt-4">AUDI x LPC</h3>
+                        <p class="text-gray-400 text-sm">SHORT FILM</p>
+                    </a>
+                    <!-- Project Item 6 -->
+                    <a href="#" class="group block">
+                        <div class="overflow-hidden rounded-lg">
+                            <img src="https://placehold.co/800x450/111111/333333?text=SHOT+ON+iPHONE" 
+                                 alt="SHOT ON iPHONE 15 PRO" 
+                                 class="w-full h-auto object-cover transform transition-transform duration-500 ease-in-out group-hover:scale-110"
+                                 onerror="this.src='https://placehold.co/800x450/111/333?text=Project+Thumbnail'">
+                        </div>
+                        <h3 class="text-xl font-bold mt-4">SHOT ON iPHONE 15 PRO</h3>
+                        <p class="text-gray-400 text-sm">COMMERCIAL</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- "What I'm Working On" Section -->
+        <section id="working-on" class="py-16 md:py-24 bg-gray-900 bg-opacity-40">
+            <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                <h2 class="text-4xl md:text-5xl font-black tracking-tighter mb-12">WHAT I'M WORKING ON</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Item 1: SFX -->
+                    <a href="#" class="group block bg-gray-800 rounded-lg p-6 hover:bg-gray-700 transition-colors">
+                        <img src="https://placehold.co/600x400/111111/333333?text=ESSENTIAL+CAR+SFX" 
+                             alt="ESSENTIAL CAR SFX" 
+                             class="w-full h-auto object-cover rounded-md mb-4"
+                             onerror="this.src='https://placehold.co/600x400/111/333?text=Product'">
+                        <h3 class="text-lg font-bold">ESSENTIAL CAR SFX</h3>
+                        <p class="text-gray-400 text-sm mt-1 mb-3">Elevate your automotive project, with an exclusive collection of SFX.</p>
+                        <span class="font-medium text-white group-hover:underline">SHOW ME</span>
+                    </a>
+                    <!-- Item 2: LUTs -->
+                    <a href="#" class="group block bg-gray-800 rounded-lg p-6 hover:bg-gray-700 transition-colors">
+                        <img src="https://placehold.co/600x400/111111/333333?text=SECRET+SAUCE+LUTS" 
+                             alt="MY COLOUR TOOLKIT" 
+                             class="w-full h-auto object-cover rounded-md mb-4"
+                             onerror="this.src='https://placehold.co/600x400/111/333?text=Product'">
+                        <h3 class="text-lg font-bold">MY COLOUR TOOLKIT - THE SECRET SAUCE</h3>
+                        <p class="text-gray-400 text-sm mt-1 mb-3">Check out my exclusive Secret Sauce Color Grading LUT collection.</p>
+                        <span class="font-medium text-white group-hover:underline">DISCOVER</span>
+                    </a>
+                    <!-- Item 3: Agency -->
+                    <a href="#" class="group block bg-gray-800 rounded-lg p-6 hover:bg-gray-700 transition-colors">
+                        <img src="https://placehold.co/600x400/111111/333333?text=OUTLINE+AGENCY" 
+                             alt="OUTLINE AGENCY" 
+                             class="w-full h-auto object-cover rounded-md mb-4"
+                             onerror="this.src='https://placehold.co/600x400/111/333?text=Product'">
+                        <h3 class="text-lg font-bold">OUTLINE - MY AGENCY</h3>
+                        <p class="text-gray-400 text-sm mt-1 mb-3">An all-round Creative Production Agency focused on High-End Branded Films.</p>
+                        <span class="font-medium text-white group-hover:underline">DISCOVER</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-16 md:py-24 border-t border-gray-800">
+        <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-5 gap-12">
+                <!-- Logo & Newsletter (Spans 2 cols on LG) -->
+                <div class="md:col-span-2 lg:col-span-2">
+                    <a href="#" class="text-4xl font-black tracking-tighter mb-6 block">RJ</a>
+                    <h4 class="font-semibold text-lg mb-3">NEWSLETTER</h4>
+                    <p class="text-gray-400 text-sm mb-4">Be the first to know about new collections and exclusive offers.</p>
+                    <form class="flex">
+                        <input type="email" placeholder="Your email" class="flex-grow bg-gray-800 border border-gray-700 rounded-l-md px-4 py-2 text-white placeholder-gray-500 focus:outline-none focus:border-white focus:ring-0">
+                        <button type="submit" class="bg-white text-black font-medium px-5 py-2 rounded-r-md hover:bg-gray-200 transition-colors">Sign Up</button>
+                    </form>
+                </div>
+                
+                <!-- Contact -->
+                <div class="md:col-span-1">
+                    <h4 class="font-semibold text-lg mb-4">CONTACT</h4>
+                    <ul class="space-y-3">
+                        <li><a href="mailto:info@reilinjoey.com" class="text-gray-400 hover:text-white transition-colors text-sm">Business inquiries</a></li>
+                        <li><a href="mailto:orders@reilinjoey.com" class="text-gray-400 hover:text-white transition-colors text-sm">Support</a></li>
+                    </ul>
+                </div>
+
+                <!-- Links -->
+                <div class="md:col-span-1">
+                    <h4 class="font-semibold text-lg mb-4">LINKS</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors text-sm">YouTube</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors text-sm">Instagram</a></li>
+                    </ul>
+                </div>
+
+                <!-- Legal -->
+                <div class="md:col-span-1">
+                    <h4 class="font-semibold text-lg mb-4">LEGAL</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors text-sm">Terms & Conditions</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors text-sm">Privacy Policy</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors text-sm">Refund Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Copyright -->
+            <div class="mt-12 pt-8 border-t border-gray-800 text-center">
+                <p class="text-gray-500 text-sm">&copy; 2025 - OUTLINE COLLECTIVE LLC</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Mobile Menu Script -->
+    <script>
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            var menu = document.getElementById('mobile-menu');
+            if (menu.classList.contains('hidden')) {
+                menu.classList.remove('hidden');
+            } else {
+                menu.classList.add('hidden');
+            }
+        });
+    </script>
+
+</body>
+</html>
