@@ -8,7 +8,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://use.typekit.net/ehp0bwx.css">
     <style>
-        /* Revert to original background and remove all custom fonts */
+        /* Set background color to black */
         body {
             background-color: #000;
             color: #f3f4f6;
@@ -38,6 +38,21 @@
         .logo-grid img:hover {
             opacity: 1;
         }
+        /* Fade-in animation for hero content */
+        .fade-in {
+            opacity: 0;
+            filter: blur(20px);
+            transition: opacity 1.5s ease, filter 1.5s ease;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            filter: blur(0);
+        }
+        .filmmaker-font {
+            font-family: "amandine", sans-serif;
+            font-weight: 300;
+            font-style: normal;
+        }
     </style>
 </head>
 <body class="text-gray-100">
@@ -47,7 +62,9 @@
         <nav class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-5">
             <div class="flex justify-between items-center">
                 <!-- Logo -->
-                <a href="#" class="text-3xl font-black tracking-tighter">RJ</a>
+                <a href="#" class="block">
+                    <img src="NRCLOGO_v2.png" alt="Noam R.C. Logo" class="h-12 w-auto">
+                </a>
                 
                 <!-- Desktop Navigation -->
                 <div class="hidden md:flex items-center space-x-8">
@@ -84,138 +101,144 @@
     <!-- Main Content -->
     <main>
         <!-- Hero Section -->
-        <section class="h-screen min-h-[700px] flex flex-col justify-center items-center text-center pt-16 px-4">
-            <div class="flex-grow flex flex-col justify-center items-center">
+        <section class="h-screen min-h-[700px] flex flex-col justify-center items-center text-center pt-16 px-4 relative overflow-hidden">
+            <!-- Video Background -->
+            <video autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover z-0" style="pointer-events: none;">
+                <source src="Website v1.mp4" type="video/mp4">
+            </video>
+            <!-- Content with fade-in effect -->
+            <div id="hero-content" class="fade-in relative z-10 flex-grow flex flex-col justify-center items-center">
                 <h1 class="noam-title text-6xl md:text-9xl font-black tracking-tighter">NOAM R.C.</h1>
-                <p class="text-xl md:text-2xl font-medium text-gray-400 mt-4 tracking-wide">filmmaker</p>
-            </div>
-            <!-- Client Logos -->
-            <div class="w-full max-w-5xl mx-auto pb-12">
-                <div class="logo-grid grid grid-cols-3 sm:grid-cols-6 gap-8 items-center px-4">
-                    <img src="https://placehold.co/100x40/000000/FFFFFF?text=Audi" alt="Audi Logo" class="w-24 h-auto mx-auto" onerror="this.src='https://placehold.co/100x40/000/FFF?text=Audi'">
-                    <img src="https://placehold.co/100x40/000000/FFFFFF?text=Ferrari" alt="Ferrari Logo" class="w-24 h-auto mx-auto" onerror="this.src='https://placehold.co/100x40/000/FFF?text=Ferrari'">
-                    <img src="https://placehold.co/100x40/000000/FFFFFF?text=Sony" alt="Sony Logo" class="w-24 h-auto mx-auto" onerror="this.src='https://placehold.co/100x40/000/FFF?text=Sony'">
-                    <img src="https://placehold.co/100x40/000000/FFFFFF?text=DJI" alt="DJI Logo" class="w-24 h-auto mx-auto" onerror="this.src='https://placehold.co/100x40/000/FFF?text=DJI'">
-                    <img src="https://placehold.co/100x40/000000/FFFFFF?text=Apple+Music" alt="Apple Music Logo" class="w-24 h-auto mx-auto" onerror="this.src='https://placehold.co/100x40/000/FFF?text=Apple+Music'">
-                    <img src="https://placehold.co/100x40/000000/FFFFFF?text=Polestar" alt="Polestar Logo" class="w-24 h-auto mx-auto" onerror="this.src='https://placehold.co/100x40/000/FFF?text=Polestar'">
-                </div>
+                <p class="filmmaker-font text-xl md:text-2xl font-medium text-gray-400 mt-4 tracking-wide">filmmaker</p>
             </div>
         </section>
 
-        <!-- Motion (Portfolio) Section -->
-        <section id="motion" class="py-16 md:py-24">
-            <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                <h2 class="text-4xl md:text-5xl font-black tracking-tighter mb-12">MOTION</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-12">
-                    <!-- Project Item 1 -->
-                    <a href="#" class="group block">
-                        <div class="overflow-hidden rounded-lg">
-                            <img src="https://placehold.co/800x450/111111/333333?text=DJI+RS3+LAUNCH" 
-                                 alt="DJI - RS3 LAUNCH FILM" 
-                                 class="w-full h-auto object-cover transform transition-transform duration-500 ease-in-out group-hover:scale-110"
-                                 onerror="this.src='https://placehold.co/800x450/111/333?text=Project+Thumbnail'">
-                        </div>
-                        <h3 class="text-xl font-bold mt-4">DJI - RS3 LAUNCH FILM</h3>
-                        <p class="text-gray-400 text-sm">SHORT FILM</p>
-                    </a>
-                    <!-- Project Item 2 -->
-                    <a href="#" class="group block">
-                        <div class="overflow-hidden rounded-lg">
-                            <img src="https://placehold.co/800x450/111111/333333?text=SONY+ZV-E1" 
-                                 alt="SONY ZV-E1 LAUNCH FILM" 
-                                 class="w-full h-auto object-cover transform transition-transform duration-500 ease-in-out group-hover:scale-110"
-                                 onerror="this.src='https://placehold.co/800x450/111/333?text=Project+Thumbnail'">
-                        </div>
-                        <h3 class="text-xl font-bold mt-4">SONY ZV-E1 LAUNCH FILM</h3>
-                        <p class="text-gray-400 text-sm">COMMERCIAL</p>
-                    </a>
-                    <!-- Project Item 3 -->
-                    <a href="#" class="group block">
-                        <div class="overflow-hidden rounded-lg">
-                            <img src="https://placehold.co/800x450/111111/333333?text=SHOWREEL+2022" 
-                                 alt="SHOWREEL 2022" 
-                                 class="w-full h-auto object-cover transform transition-transform duration-500 ease-in-out group-hover:scale-110"
-                                 onerror="this.src='https://placehold.co/800x450/111/333?text=Project+Thumbnail'">
-                        </div>
-                        <h3 class="text-xl font-bold mt-4">SHOWREEL 2022</h3>
-                        <p class="text-gray-400 text-sm">REEL</p>
-                    </a>
-                    <!-- Project Item 4 -->
-                    <a href="#" class="group block">
-                        <div class="overflow-hidden rounded-lg">
-                            <img src="https://placehold.co/800x450/111111/333333?text=FERRARI+PARIS" 
-                                 alt="FERRARI PARIS - OPENING FILM" 
-                                 class="w-full h-auto object-cover transform transition-transform duration-500 ease-in-out group-hover:scale-110"
-                                 onerror="this.src='https://placehold.co/800x450/111/333?text=Project+Thumbnail'">
-                        </div>
-                        <h3 class="text-xl font-bold mt-4">FERRARI PARIS - OPENING FILM</h3>
-                        <p class="text-gray-400 text-sm">BRANDED CONTENT</p>
-                    </a>
-                    <!-- Project Item 5 -->
-                    <a href="#" class="group block">
-                        <div class="overflow-hidden rounded-lg">
-                            <img src="https://placehold.co/800x450/111111/333333?text=AUDI+x+LPC" 
-                                 alt="AUDI x LPC" 
-                                 class="w-full h-auto object-cover transform transition-transform duration-500 ease-in-out group-hover:scale-110"
-                                 onerror="this.src='https://placehold.co/800x450/111/333?text=Project+Thumbnail'">
-                        </div>
-                        <h3 class="text-xl font-bold mt-4">AUDI x LPC</h3>
-                        <p class="text-gray-400 text-sm">SHORT FILM</p>
-                    </a>
-                    <!-- Project Item 6 -->
-                    <a href="#" class="group block">
-                        <div class="overflow-hidden rounded-lg">
-                            <img src="https://placehold.co/800x450/111111/333333?text=SHOT+ON+iPHONE" 
-                                 alt="SHOT ON iPHONE 15 PRO" 
-                                 class="w-full h-auto object-cover transform transition-transform duration-500 ease-in-out group-hover:scale-110"
-                                 onerror="this.src='https://placehold.co/800x450/111/333?text=Project+Thumbnail'">
-                        </div>
-                        <h3 class="text-xl font-bold mt-4">SHOT ON iPHONE 15 PRO</h3>
-                        <p class="text-gray-400 text-sm">COMMERCIAL</p>
-                    </a>
-                </div>
+        <!-- Client Logos -->
+        <div class="w-full max-w-5xl mx-auto pb-12">
+            <div class="logo-grid grid grid-cols-3 sm:grid-cols-6 gap-8 items-center px-4">
+                <img src="https://placehold.co/100x40/000000/FFFFFF?text=Audi" alt="Audi Logo" class="w-24 h-auto mx-auto" onerror="this.src='https://placehold.co/100x40/000/FFF?text=Audi'">
+                <img src="https://placehold.co/100x40/000000/FFFFFF?text=Ferrari" alt="Ferrari Logo" class="w-24 h-auto mx-auto" onerror="this.src='https://placehold.co/100x40/000/FFF?text=Ferrari'">
+                <img src="https://placehold.co/100x40/000000/FFFFFF?text=Sony" alt="Sony Logo" class="w-24 h-auto mx-auto" onerror="this.src='https://placehold.co/100x40/000/FFF?text=Sony'">
+                <img src="https://placehold.co/100x40/000000/FFFFFF?text=DJI" alt="DJI Logo" class="w-24 h-auto mx-auto" onerror="this.src='https://placehold.co/100x40/000/FFF?text=DJI'">
+                <img src="https://placehold.co/100x40/000000/FFFFFF?text=Apple+Music" alt="Apple Music Logo" class="w-24 h-auto mx-auto" onerror="this.src='https://placehold.co/100x40/000/FFF?text=Apple+Music'">
+                <img src="https://placehold.co/100x40/000000/FFFFFF?text=Polestar" alt="Polestar Logo" class="w-24 h-auto mx-auto" onerror="this.src='https://placehold.co/100x40/000/FFF?text=Polestar'">
             </div>
-        </section>
-
-        <!-- "What I'm Working On" Section -->
-        <section id="working-on" class="py-16 md:py-24 bg-gray-900 bg-opacity-40">
-            <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                <h2 class="text-4xl md:text-5xl font-black tracking-tighter mb-12">WHAT I'M WORKING ON</h2>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <!-- Item 1: SFX -->
-                    <a href="#" class="group block bg-gray-800 rounded-lg p-6 hover:bg-gray-700 transition-colors">
-                        <img src="https://placehold.co/600x400/111111/333333?text=ESSENTIAL+CAR+SFX" 
-                             alt="ESSENTIAL CAR SFX" 
-                             class="w-full h-auto object-cover rounded-md mb-4"
-                             onerror="this.src='https://placehold.co/600x400/111/333?text=Product'">
-                        <h3 class="text-lg font-bold">ESSENTIAL CAR SFX</h3>
-                        <p class="text-gray-400 text-sm mt-1 mb-3">Elevate your automotive project, with an exclusive collection of SFX.</p>
-                        <span class="font-medium text-white group-hover:underline">SHOW ME</span>
-                    </a>
-                    <!-- Item 2: LUTs -->
-                    <a href="#" class="group block bg-gray-800 rounded-lg p-6 hover:bg-gray-700 transition-colors">
-                        <img src="https://placehold.co/600x400/111111/333333?text=SECRET+SAUCE+LUTS" 
-                             alt="MY COLOUR TOOLKIT" 
-                             class="w-full h-auto object-cover rounded-md mb-4"
-                             onerror="this.src='https://placehold.co/600x400/111/333?text=Product'">
-                        <h3 class="text-lg font-bold">MY COLOUR TOOLKIT - THE SECRET SAUCE</h3>
-                        <p class="text-gray-400 text-sm mt-1 mb-3">Check out my exclusive Secret Sauce Color Grading LUT collection.</p>
-                        <span class="font-medium text-white group-hover:underline">DISCOVER</span>
-                    </a>
-                    <!-- Item 3: Agency -->
-                    <a href="#" class="group block bg-gray-800 rounded-lg p-6 hover:bg-gray-700 transition-colors">
-                        <img src="https://placehold.co/600x400/111111/333333?text=OUTLINE+AGENCY" 
-                             alt="OUTLINE AGENCY" 
-                             class="w-full h-auto object-cover rounded-md mb-4"
-                             onerror="this.src='https://placehold.co/600x400/111/333?text=Product'">
-                        <h3 class="text-lg font-bold">OUTLINE - MY AGENCY</h3>
-                        <p class="text-gray-400 text-sm mt-1 mb-3">An all-round Creative Production Agency focused on High-End Branded Films.</p>
-                        <span class="font-medium text-white group-hover:underline">DISCOVER</span>
-                    </a>
-                </div>
-            </div>
-        </section>
+        </div>
     </main>
+
+    <!-- Motion (Portfolio) Section -->
+    <section id="motion" class="py-16 md:py-24">
+        <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl md:text-5xl font-black tracking-tighter mb-12">MOTION</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-12">
+                <!-- Project Item 1 -->
+                <a href="#" class="group block">
+                    <div class="overflow-hidden rounded-lg">
+                        <img src="https://placehold.co/800x450/111111/333333?text=DJI+RS3+LAUNCH" 
+                             alt="DJI - RS3 LAUNCH FILM" 
+                             class="w-full h-auto object-cover transform transition-transform duration-500 ease-in-out group-hover:scale-110"
+                             onerror="this.src='https://placehold.co/800x450/111/333?text=Project+Thumbnail'">
+                    </div>
+                    <h3 class="text-xl font-bold mt-4">DJI - RS3 LAUNCH FILM</h3>
+                    <p class="text-gray-400 text-sm">SHORT FILM</p>
+                </a>
+                <!-- Project Item 2 -->
+                <a href="#" class="group block">
+                    <div class="overflow-hidden rounded-lg">
+                        <img src="https://placehold.co/800x450/111111/333333?text=SONY+ZV-E1" 
+                             alt="SONY ZV-E1 LAUNCH FILM" 
+                             class="w-full h-auto object-cover transform transition-transform duration-500 ease-in-out group-hover:scale-110"
+                             onerror="this.src='https://placehold.co/800x450/111/333?text=Project+Thumbnail'">
+                    </div>
+                    <h3 class="text-xl font-bold mt-4">SONY ZV-E1 LAUNCH FILM</h3>
+                    <p class="text-gray-400 text-sm">COMMERCIAL</p>
+                </a>
+                <!-- Project Item 3 -->
+                <a href="#" class="group block">
+                    <div class="overflow-hidden rounded-lg">
+                        <img src="https://placehold.co/800x450/111111/333333?text=SHOWREEL+2022" 
+                             alt="SHOWREEL 2022" 
+                             class="w-full h-auto object-cover transform transition-transform duration-500 ease-in-out group-hover:scale-110"
+                             onerror="this.src='https://placehold.co/800x450/111/333?text=Project+Thumbnail'">
+                    </div>
+                    <h3 class="text-xl font-bold mt-4">SHOWREEL 2022</h3>
+                    <p class="text-gray-400 text-sm">REEL</p>
+                </a>
+                <!-- Project Item 4 -->
+                <a href="#" class="group block">
+                    <div class="overflow-hidden rounded-lg">
+                        <img src="https://placehold.co/800x450/111111/333333?text=FERRARI+PARIS" 
+                             alt="FERRARI PARIS - OPENING FILM" 
+                             class="w-full h-auto object-cover transform transition-transform duration-500 ease-in-out group-hover:scale-110"
+                             onerror="this.src='https://placehold.co/800x450/111/333?text=Project+Thumbnail'">
+                    </div>
+                    <h3 class="text-xl font-bold mt-4">FERRARI PARIS - OPENING FILM</h3>
+                    <p class="text-gray-400 text-sm">BRANDED CONTENT</p>
+                </a>
+                <!-- Project Item 5 -->
+                <a href="#" class="group block">
+                    <div class="overflow-hidden rounded-lg">
+                        <img src="https://placehold.co/800x450/111111/333333?text=AUDI+x+LPC" 
+                             alt="AUDI x LPC" 
+                             class="w-full h-auto object-cover transform transition-transform duration-500 ease-in-out group-hover:scale-110"
+                             onerror="this.src='https://placehold.co/800x450/111/333?text=Project+Thumbnail'">
+                    </div>
+                    <h3 class="text-xl font-bold mt-4">AUDI x LPC</h3>
+                    <p class="text-gray-400 text-sm">SHORT FILM</p>
+                </a>
+                <!-- Project Item 6 -->
+                <a href="#" class="group block">
+                    <div class="overflow-hidden rounded-lg">
+                        <img src="https://placehold.co/800x450/111111/333333?text=FERRARI+ROMA" 
+                             alt="FERRARI ROMA - SPOT" 
+                             class="w-full h-auto object-cover transform transition-transform duration-500 ease-in-out group-hover:scale-110"
+                             onerror="this.src='https://placehold.co/800x450/111/333?text=Project+Thumbnail'">
+                    </div>
+                    <h3 class="text-xl font-bold mt-4">FERRARI ROMA - SPOT</h3>
+                    <p class="text-gray-400 text-sm">COMMERCIAL</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- "What I'm Working On" Section -->
+    <section id="working-on" class="py-16 md:py-24 bg-gray-900 bg-opacity-40">
+        <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl md:text-5xl font-black tracking-tighter mb-12">WHAT I'M WORKING ON</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Item 1: SFX -->
+                <a href="#" class="group block bg-gray-800 rounded-lg p-6 hover:bg-gray-700 transition-colors">
+                    <img src="https://placehold.co/600x400/111111/333333?text=ESSENTIAL+CAR+SFX" 
+                         alt="ESSENTIAL CAR SFX" 
+                         class="w-full h-auto object-cover rounded-md mb-4"
+                         onerror="this.src='https://placehold.co/600x400/111/333?text=Product'">
+                    <h3 class="text-lg font-bold">ESSENTIAL CAR SFX</h3>
+                    <p class="text-gray-400 text-sm mt-1 mb-3">Elevate your automotive project, with an exclusive collection of SFX.</p>
+                    <span class="font-medium text-white group-hover:underline">SHOW ME</span>
+                </a>
+                <!-- Item 2: LUTs -->
+                <a href="#" class="group block bg-gray-800 rounded-lg p-6 hover:bg-gray-700 transition-colors">
+                    <img src="https://placehold.co/600x400/111111/333333?text=SECRET+SAUCE+LUTS" 
+                         alt="MY COLOUR TOOLKIT" 
+                         class="w-full h-auto object-cover rounded-md mb-4"
+                         onerror="this.src='https://placehold.co/600x400/111/333?text=Product'">
+                    <h3 class="text-lg font-bold">MY COLOUR TOOLKIT - THE SECRET SAUCE</h3>
+                    <p class="text-gray-400 text-sm mt-1 mb-3">Check out my exclusive Secret Sauce Color Grading LUT collection.</p>
+                    <span class="font-medium text-white group-hover:underline">DISCOVER</span>
+                </a>
+                <!-- Item 3: Agency -->
+                <a href="#" class="group block bg-gray-800 rounded-lg p-6 hover:bg-gray-700 transition-colors">
+                    <img src="https://placehold.co/600x400/111111/333333?text=OUTLINE+AGENCY" 
+                         alt="OUTLINE AGENCY" 
+                         class="w-full h-auto object-cover rounded-md mb-4"
+                         onerror="this.src='https://placehold.co/600x400/111/333?text=Product'">
+                    <h3 class="text-lg font-bold">OUTLINE - MY AGENCY</h3>
+                    <p class="text-gray-400 text-sm mt-1 mb-3">An all-round Creative Production Agency focused on High-End Branded Films.</p>
+                    <span class="font-medium text-white group-hover:underline">DISCOVER</span>
+                </a>
+            </div>
+        </div>
+    </section>
 
     <!-- Footer -->
     <footer class="py-16 md:py-24 border-t border-gray-800">
@@ -223,7 +246,9 @@
             <div class="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-5 gap-12">
                 <!-- Logo & Newsletter (Spans 2 cols on LG) -->
                 <div class="md:col-span-2 lg:col-span-2">
-                    <a href="#" class="text-4xl font-black tracking-tighter mb-6 block">RJ</a>
+                    <a href="#" class="block mb-6">
+                        <img src="NRCLOGO_v2.png" alt="Noam R.C. Logo" class="h-16 w-auto">
+                    </a>
                     <h4 class="font-semibold text-lg mb-3">NEWSLETTER</h4>
                     <p class="text-gray-400 text-sm mb-4">Be the first to know about new collections and exclusive offers.</p>
                     <form class="flex">
@@ -277,6 +302,13 @@
             } else {
                 menu.classList.add('hidden');
             }
+        });
+
+        // Fade in hero content on page load
+        window.addEventListener('DOMContentLoaded', function() {
+            setTimeout(function() {
+                document.getElementById('hero-content').classList.add('visible');
+            }, 300); // slight delay for effect
         });
     </script>
 
