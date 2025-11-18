@@ -53,6 +53,17 @@
             font-weight: 300;
             font-style: normal;
         }
+
+        /* Header fade transition */
+        header {
+            transition: opacity .4s ease, transform .4s ease;
+            will-change: opacity, transform;
+        }
+        header.header-hidden {
+            opacity: 0;
+            transform: translateY(-10px);
+            pointer-events: none;
+        }
     </style>
 </head>
 <body class="text-gray-100">
@@ -240,21 +251,60 @@
         </div>
     </section>
 
+    <!-- Posters Section -->
+    <section id="posters" class="py-16 md:py-24">
+        <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <h2 class="sr-only">Posters</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
+                <figure class="flex flex-col items-center">
+                    <img src="littlethingsposter.png" alt="Little Things poster" class="w-full max-w-sm rounded shadow-lg">
+                    <figcaption class="mt-4 text-sm tracking-wider uppercase text-gray-300">LITTLE THINGS</figcaption>
+                </figure>
+            </div>
+        </div>
+    </section>
+
+    <!-- NARRATIVE FILMS (new portfolio section) -->
+    <section id="narrative-films" class="py-16 md:py-24">
+        <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl md:text-5xl font-black tracking-tighter mb-12">NARRATIVE FILMS</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+                <article class="group">
+                    <div class="overflow-hidden rounded-lg">
+                        <img src="littlethingsposter.png" alt="Little Things" class="w-full h-64 object-cover transform transition-transform duration-500 ease-in-out group-hover:scale-105">
+                    </div>
+                    <h3 class="text-lg font-semibold mt-4">LITTLE THINGS</h3>
+                    <p class="text-gray-400 text-sm uppercase tracking-wider">POSTER / NARRATIVE</p>
+                </article>
+
+                <article class="group">
+                    <div class="overflow-hidden rounded-lg bg-gray-800">
+                        <img src="https://placehold.co/600x900/111111/FFFFFF?text=COMING+SOON" alt="Coming Soon" class="w-full h-64 object-cover transform transition-transform duration-500 ease-in-out group-hover:scale-105">
+                    </div>
+                    <h3 class="text-lg font-semibold mt-4">COMING SOON</h3>
+                    <p class="text-gray-400 text-sm uppercase tracking-wider">POSTER / NARRATIVE</p>
+                </article>
+
+                <article class="group">
+                    <div class="overflow-hidden rounded-lg bg-gray-800">
+                        <img src="https://placehold.co/600x900/111111/FFFFFF?text=SAMPLE+POSTER" alt="Sample Poster" class="w-full h-64 object-cover transform transition-transform duration-500 ease-in-out group-hover:scale-105">
+                    </div>
+                    <h3 class="text-lg font-semibold mt-4">SAMPLE POSTER</h3>
+                    <p class="text-gray-400 text-sm uppercase tracking-wider">POSTER / NARRATIVE</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
     <!-- Footer -->
     <footer class="py-16 md:py-24 border-t border-gray-800">
         <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-5 gap-12">
-                <!-- Logo & Newsletter (Spans 2 cols on LG) -->
+                <!-- Logo (newsletter removed) -->
                 <div class="md:col-span-2 lg:col-span-2">
                     <a href="#" class="block mb-6">
                         <img src="NRCLOGO_v2.png" alt="Noam R.C. Logo" class="h-16 w-auto">
                     </a>
-                    <h4 class="font-semibold text-lg mb-3">NEWSLETTER</h4>
-                    <p class="text-gray-400 text-sm mb-4">Be the first to know about new collections and exclusive offers.</p>
-                    <form class="flex">
-                        <input type="email" placeholder="Your email" class="flex-grow bg-gray-800 border border-gray-700 rounded-l-md px-4 py-2 text-white placeholder-gray-500 focus:outline-none focus:border-white focus:ring-0">
-                        <button type="submit" class="bg-white text-black font-medium px-5 py-2 rounded-r-md hover:bg-gray-200 transition-colors">Sign Up</button>
-                    </form>
                 </div>
                 
                 <!-- Contact -->
@@ -310,6 +360,24 @@
                 document.getElementById('hero-content').classList.add('visible');
             }, 300); // slight delay for effect
         });
+
+        // Header fade out after scrolling past the opening (hero) section
+        (function() {
+            var header = document.querySelector('header');
+            var hero = document.querySelector('section.h-screen');
+            if (!header || !hero) return;
+            function updateHeaderVisibility() {
+                var threshold = hero.offsetHeight - header.offsetHeight;
+                if (window.scrollY > threshold) {
+                    header.classList.add('header-hidden');
+                } else {
+                    header.classList.remove('header-hidden');
+                }
+            }
+            window.addEventListener('scroll', updateHeaderVisibility, { passive: true });
+            window.addEventListener('resize', updateHeaderVisibility);
+            updateHeaderVisibility();
+        })();
     </script>
 
 </body>
