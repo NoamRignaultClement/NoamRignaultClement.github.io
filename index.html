@@ -6,18 +6,24 @@
     <title>Noam R.C. - Filmmaker & Director</title>
     <!-- Load Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Load Inter font -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.typekit.net/ehp0bwx.css">
     <style>
-        /* Apply Inter font */
+        /* Revert to original background and remove all custom fonts */
         body {
-            font-family: 'Inter', sans-serif;
             background-color: #000;
             color: #f3f4f6;
+            font-family: sans-serif;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+        }
+        h1.noam-title {
+            font-family: "bodega-serif", serif;
+            font-weight: 300;
+            font-style: normal;
+        }
+        /* Remove font overrides from all elements */
+        h1, h2, h3, h4, h5, h6, p, a, span, button, input, textarea, .font-black, .font-bold, .font-semibold, .font-medium {
+            font-family: inherit;
         }
         /* Custom styles for grid image hover effect (zoom) */
         .group:hover .group-hover\:scale-110 {
@@ -34,7 +40,7 @@
         }
     </style>
 </head>
-<body class="bg-black text-gray-100">
+<body class="text-gray-100">
 
     <!-- Header -->
     <header class="fixed top-0 left-0 right-0 z-50 bg-black bg-opacity-80 backdrop-blur-md">
@@ -80,8 +86,8 @@
         <!-- Hero Section -->
         <section class="h-screen min-h-[700px] flex flex-col justify-center items-center text-center pt-16 px-4">
             <div class="flex-grow flex flex-col justify-center items-center">
-                <h1 class="text-6xl md:text-9xl font-black tracking-tighter">NOAM R.C.</h1>
-                <p class="text-xl md:text-2xl font-medium text-gray-400 mt-4 tracking-wide">FILMMAKER — AVAILABLE WORLDWIDE</p>
+                <h1 class="noam-title text-6xl md:text-9xl font-black tracking-tighter">NOAM R.C.</h1>
+                <p class="text-xl md:text-2xl font-medium text-gray-400 mt-4 tracking-wide">filmmaker</p>
             </div>
             <!-- Client Logos -->
             <div class="w-full max-w-5xl mx-auto pb-12">
