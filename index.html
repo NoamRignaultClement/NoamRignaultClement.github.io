@@ -1,414 +1,94 @@
 <!DOCTYPE html>
 <html lang="en" class="dark">
 <head>
-    <meta charset="UTF-g">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Noam R.C. - Filmmaker & Director</title>
-    <!-- Load Tailwind CSS -->
+    <title>Noam R.C. - Filmmaker</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://use.typekit.net/ehp0bwx.css">
     <style>
-        /* Set background color to black */
-        body {
-            background-color: #000;
-            color: #f3f4f6;
-            font-family: sans-serif;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-        h1.noam-title {
-            font-family: "bodega-serif", serif;
-            font-weight: 300;
-            font-style: normal;
-        }
-        /* Remove font overrides from all elements */
-        h1, h2, h3, h4, h5, h6, p, a, span, button, input, textarea, .font-black, .font-bold, .font-semibold, .font-medium {
-            font-family: inherit;
-        }
-        /* Custom styles for grid image hover effect (zoom) */
-        .group:hover .group-hover\:scale-110 {
-            transform: scale(1.1);
-        }
-   
-        /* Fade-in animation for hero content */
-        .fade-in {
-            opacity: 0;
-            filter: blur(20px);
-            transition: opacity 1.5s ease, filter 1.5s ease;
-        }
-        .fade-in.visible {
-            opacity: 1;
-            filter: blur(0);
-        }
-        .filmmaker-font {
-            font-family: "amandine", sans-serif;
-            font-weight: 300;
-            font-style: normal;
-        }
-
-        /* Header fade transition */
-        header {
-            transition: opacity .4s ease, transform .4s ease;
-            will-change: opacity, transform;
-        }
-        header.header-hidden {
-            opacity: 0;
-            transform: translateY(-10px);
-            pointer-events: none;
-        }
-
-        /* Apply "bodega-serif" font to all uppercase titles */
-        h1, h2, h3, h4, h5, h6 {
-            font-family: "bodega-serif", serif;
-            font-weight: 300;
-            font-style: normal;
-            text-transform: uppercase; /* Ensure the text is uppercase */
-        }
-
-        /* Portfolio selections: use Adobe Fonts kit (loaded via the link to use.typekit.net) */
-        /* Replace with the exact family name from your Typekit kit if different */
-        #motion h2,
-        #motion h3,
-        #motion p,
-        #motion a,
-        #posters h2,
-        #posters h3,
-        #posters p,
-        #posters figcaption,
-        #working-on h3,
-        #working-on p {
-            font-family: "bodega-serif", serif !important;
-            font-weight: 300 !important;
-            font-style: normal !important;
-        }
-
-        /* Center portfolio section headings in the middle of the screen */
-        #posters h2,
-        #motion h2,
-        #working-on h2 {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 60vh; /* centers vertically ~middle of viewport — adjust as needed */
-            margin: 0;
-            text-align: center;
-        }
-
-        /* Reduce vertical spacing between all sections */
-        section {
-            padding-top: 1.5rem !important;    /* ~24px */
-            padding-bottom: 1.5rem !important; /* ~24px */
-        }
-
-        /* Override Tailwind section utilities */
-        .py-16 { padding-top: 1.5rem !important; padding-bottom: 1.5rem !important; }
-        .md\:py-24 { padding-top: 1.5rem !important; padding-bottom: 1.5rem !important; }
-
-        /* Reduce bottom margin for section headings */
-        section h2 {
-            margin-bottom: 0.75rem !important; /* ~12px */
-        }
-
-        /* Tighten common grid gaps used in portfolios */
-        .gap-8 { gap: 0.75rem !important; }
-        .gap-x-8 { column-gap: 0.75rem !important; }
-        .gap-y-12 { row-gap: 0.5rem !important; }
-
-        /* Slightly reduce the centered heading block height */
-        #posters h2,
-        #motion h2,
-        #working-on h2 {
-            height: 30vh !important;
-        }
-
-        /* Increase figcaption size in posters by ~2 steps */
-        #posters figcaption {
-            font-size: 1.125rem !important; /* was text-sm (~0.875rem); increased */
-            line-height: 1.2;
-        }
+        body { background:#000; color:#f3f4f6; font-family:"amandine",sans-serif; -webkit-font-smoothing:antialiased; }
+        h1,h2,h3,h4,h5,h6 { font-family:"bodega-serif",serif; font-weight:300; letter-spacing:.05em;}
+        header, header * { font-family:"amandine",sans-serif; font-weight:300; }
+        figcaption { font-family:"bodega-serif",serif; font-size: 30px; font-weight:300; letter-spacing:.5em;}
+        .fade-in { opacity:0; filter:blur(20px); transition:opacity 1.2s ease, filter 1.2s ease; }
+        .fade-in.visible { opacity:1; filter:blur(0); }
+        #posters figure img { transition:transform .5s cubic-bezier(.22,.8,.28,1), box-shadow .3s; cursor:pointer; }
+        #posters figure:hover img { transform:scale(1.05); box-shadow:0 20px 40px rgba(0,0,0,.6); }
     </style>
 </head>
 <body class="text-gray-100">
+    <div id="header-container"></div>
 
-    <!-- Header -->
-    <header class="fixed top-0 left-0 right-0 z-50">
-        <nav class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-5">
-            <div class="flex justify-between items-center">
-                <!-- (left side kept empty so logo sits with the nav on the right) -->
-                <div class="flex items-center">
-                    <!-- optional: site title or left content -->
-                </div>
-
-                <!-- Desktop Navigation + Logo (logo moved to the right next to CONTACT) -->
-                <div class="hidden md:flex items-center space-x-6">
-                    <a href="#" class="text-sm font-medium text-gray-300 hover:text-white transition-colors">HOME</a>
-                    <a href="#" class="text-sm font-medium text-gray-300 hover:text-white transition-colors">ABOUT</a>
-                    <a href="#" class="text-sm font-medium text-gray-300 hover:text-white transition-colors">CONTACT</a>
-                    </a>
-
-                    <!-- Logo placed to the right of the CONTACT button -->
-                    <a href="#" class="block ml-4">
-                        <img src="NRCLOGO_v2.png" alt="Noam R.C. Logo" class="h-12 w-auto">
-                    </a>
-                </div>
-
-                <!-- Mobile Menu Button -->
-                <div class="md:hidden">
-                    <button id="mobile-menu-button" class="text-white focus:outline-none">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
-                        </svg>
-                    </button>
-                </div>
-            </div>
-        </nav>
-
-        <!-- Mobile Menu (Hidden by default) -->
-        <div id="mobile-menu" class="hidden md:hidden bg-black py-4">
-            <a href="#" class="block text-center text-gray-300 hover:text-white py-2">HOME</a>
-            <a href="#" class="block text-center text-gray-300 hover:text-white py-2">CONTACT</a>
-            <a href="#" class="block text-center w-3/4 mx-auto mt-2 bg-white text-black px-5 py-2 rounded-full text-sm font-medium hover:bg-gray-200 transition-colors">
-                Join the Community
-            </a>
-        </div>
-    </header>
-
-    <!-- Main Content -->
     <main>
-        <!-- Hero Section -->
-        <section class="h-screen min-h-[700px] flex flex-col justify-center items-center text-center pt-16 px-4 relative overflow-hidden">
-            <!-- Video Background -->
-            <video autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover z-0" style="pointer-events: none;">
-                <source src="Website v1.mp4" type="video/mp4">
+        <section id="hero" class="h-screen min-h-[700px] flex flex-col justify-center items-center text-center pt-16 px-4 relative overflow-hidden">
+            <video autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover z-0" style="pointer-events:none;">
+                <source src="media/Website v1.mp4" type="video/mp4">
             </video>
-            <!-- Content with fade-in effect -->
-            <div id="hero-content" class="fade-in relative z-10 flex-grow flex flex-col justify-center items-center">
-                <h1 class="noam-title text-6xl md:text-9xl font-black tracking-tighter">NOAM R.C.</h1>
-                <p class="filmmaker-font text-xl md:text-2xl font-medium text-gray-400 mt-4 tracking-wide">filmmaker</p>
+            <div id="hero-content" class="fade-in relative z-10">
+                <h1 class="noam-title text-6xl md:text-9xl tracking-tighter font-normal">NOAM R.C.</h1>
+                <p class="text-xl md:text-3xl text-gray-400 mt-2 tracking-tighter">filmmaker</p>
             </div>
         </section>
 
-    <!-- Posters (Portfolio) Section -->
-    <section id="posters" class="py-16 md:py-24">
-        <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <h2 class="text-4xl md:text-5xl font-black tracking-tighter mb-12">NARRATIVE WORK</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
-                <figure class="flex flex-col items-center">
-                    <img src="littlethingsposter.png" alt="Little Things poster" class="rounded shadow-lg" style="width: auto; height: auto; max-width: 100%; max-height: 100%;">
-                    <figcaption class="mt-4 text-sm tracking-wider uppercase text-gray-300">LITTLE THINGS</figcaption>
-                     <p class="text-gray-400 text-sm">creator</p>
-                     
-                </figure>
-                <figure class="flex flex-col items-center">
-                    <img src="https://placehold.co/600x900/111111/FFFFFF?text=COMING+SOON" alt="Coming Soon" class="rounded shadow-lg" style="width: auto; height: auto; max-width: 100%; max-height: 100%;">
-                    <figcaption class="mt-4 text-sm tracking-wider uppercase text-gray-300">COMING SOON</figcaption>
-                </figure>
-                <figure class="flex flex-col items-center">
-                    <img src="https://placehold.co/600x900/111111/FFFFFF?text=SAMPLE+POSTER" alt="Sample Poster" class="rounded shadow-lg" style="width: auto; height: auto; max-width: 100%; max-height: 100%;">
-                    <figcaption class="mt-4 text-sm tracking-wider uppercase text-gray-300">SAMPLE POSTER</figcaption>
-                </figure>
-            </div>
-        </div>
-    </section>
-
-    <!-- Motion (Portfolio) Section -->
-    <section id="motion" class="py-16 md:py-24">
-        <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <h2 class="text-4xl md:text-5xl font-black tracking-tighter mb-12">MOTION</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-12">
-                <!-- Project Item 1 -->
-                <a href="#" class="group block">
-                    <div class="overflow-hidden rounded-lg">
-                        <img src="https://placehold.co/800x450/111111/333333?text=DJI+RS3+LAUNCH" 
-                             alt="DJI - RS3 LAUNCH FILM" 
-                             class="w-full h-auto object-cover transform transition-transform duration-500 ease-in-out group-hover:scale-110"
-                             onerror="this.src='https://placehold.co/800x450/111/333?text=Project+Thumbnail'">
-                    </div>
-                    <h3 class="text-xl font-bold mt-4">DJI - RS3 LAUNCH FILM</h3>
-                    <p class="text-gray-400 text-sm">SHORT FILM</p>
-                </a>
-                <!-- Project Item 2 -->
-                <a href="#" class="group block">
-                    <div class="overflow-hidden rounded-lg">
-                        <img src="https://placehold.co/800x450/111111/333333?text=SONY+ZV-E1" 
-                             alt="SONY ZV-E1 LAUNCH FILM" 
-                             class="w-full h-auto object-cover transform transition-transform duration-500 ease-in-out group-hover:scale-110"
-                             onerror="this.src='https://placehold.co/800x450/111/333?text=Project+Thumbnail'">
-                    </div>
-                    <h3 class="text-xl font-bold mt-4">SONY ZV-E1 LAUNCH FILM</h3>
-                    <p class="text-gray-400 text-sm">COMMERCIAL</p>
-                </a>
-                <!-- Project Item 3 -->
-                <a href="#" class="group block">
-                    <div class="overflow-hidden rounded-lg">
-                        <img src="https://placehold.co/800x450/111111/333333?text=SHOWREEL+2022" 
-                             alt="SHOWREEL 2022" 
-                             class="w-full h-auto object-cover transform transition-transform duration-500 ease-in-out group-hover:scale-110"
-                             onerror="this.src='https://placehold.co/800x450/111/333?text=Project+Thumbnail'">
-                    </div>
-                    <h3 class="text-xl font-bold mt-4">SHOWREEL 2022</h3>
-                    <p class="text-gray-400 text-sm">REEL</p>
-                </a>
-                <!-- Project Item 4 -->
-                <a href="#" class="group block">
-                    <div class="overflow-hidden rounded-lg">
-                        <img src="https://placehold.co/800x450/111111/333333?text=FERRARI+PARIS" 
-                             alt="FERRARI PARIS - OPENING FILM" 
-                             class="w-full h-auto object-cover transform transition-transform duration-500 ease-in-out group-hover:scale-110"
-                             onerror="this.src='https://placehold.co/800x450/111/333?text=Project+Thumbnail'">
-                    </div>
-                    <h3 class="text-xl font-bold mt-4">FERRARI PARIS - OPENING FILM</h3>
-                    <p class="text-gray-400 text-sm">BRANDED CONTENT</p>
-                </a>
-                <!-- Project Item 5 -->
-                <a href="#" class="group block">
-                    <div class="overflow-hidden rounded-lg">
-                        <img src="https://placehold.co/800x450/111111/333333?text=AUDI+x+LPC" 
-                             alt="AUDI x LPC" 
-                             class="w-full h-auto object-cover transform transition-transform duration-500 ease-in-out group-hover:scale-110"
-                             onerror="this.src='https://placehold.co/800x450/111/333?text=Project+Thumbnail'">
-                    </div>
-                    <h3 class="text-xl font-bold mt-4">AUDI x LPC</h3>
-                    <p class="text-gray-400 text-sm">SHORT FILM</p>
-                </a>
-                <!-- Project Item 6 -->
-                <a href="#" class="group block">
-                    <div class="overflow-hidden rounded-lg">
-                        <img src="https://placehold.co/800x450/111111/333333?text=FERRARI+ROMA" 
-                             alt="FERRARI ROMA - SPOT" 
-                             class="w-full h-auto object-cover transform transition-transform duration-500 ease-in-out group-hover:scale-110"
-                             onerror="this.src='https://placehold.co/800x450/111/333?text=Project+Thumbnail'">
-                    </div>
-                    <h3 class="text-xl font-bold mt-4">FERRARI ROMA - SPOT</h3>
-                    <p class="text-gray-400 text-sm">COMMERCIAL</p>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- "What I'm Working On" (portfolio) Section -->
-    <section id="working-on" class="py-16 md:py-24 bg-gray-900 bg-opacity-40">
-        <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <h2 class="text-4xl md:text-5xl font-black tracking-tighter mb-12">WHAT I'M WORKING ON</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Item 1: SFX -->
-                <a href="#" class="group block bg-gray-800 rounded-lg p-6 hover:bg-gray-700 transition-colors">
-                    <img src="https://placehold.co/600x400/111111/333333?text=ESSENTIAL+CAR+SFX" 
-                         alt="ESSENTIAL CAR SFX" 
-                         class="w-full h-auto object-cover rounded-md mb-4"
-                         onerror="this.src='https://placehold.co/600x400/111/333?text=Product'">
-                    <h3 class="text-lg font-bold">ESSENTIAL CAR SFX</h3>
-                    <p class="text-gray-400 text-sm mt-1 mb-3">Elevate your automotive project, with an exclusive collection of SFX.</p>
-                    <span class="font-medium text-white group-hover:underline">SHOW ME</span>
-                </a>
-                <!-- Item 2: LUTs -->
-                <a href="#" class="group block bg-gray-800 rounded-lg p-6 hover:bg-gray-700 transition-colors">
-                    <img src="https://placehold.co/600x400/111111/333333?text=SECRET+SAUCE+LUTS" 
-                         alt="MY COLOUR TOOLKIT" 
-                         class="w-full h-auto object-cover rounded-md mb-4"
-                         onerror="this.src='https://placehold.co/600x400/111/333?text=Product'">
-                    <h3 class="text-lg font-bold">MY COLOUR TOOLKIT - THE SECRET SAUCE</h3>
-                    <p class="text-gray-400 text-sm mt-1 mb-3">Check out my exclusive Secret Sauce Color Grading LUT collection.</p>
-                    <span class="font-medium text-white group-hover:underline">DISCOVER</span>
-                </a>
-                <!-- Item 3: Agency -->
-                <a href="#" class="group block bg-gray-800 rounded-lg p-6 hover:bg-gray-700 transition-colors">
-                    <img src="https://placehold.co/600x400/111111/333333?text=OUTLINE+AGENCY" 
-                         alt="OUTLINE AGENCY" 
-                         class="w-full h-auto object-cover rounded-md mb-4"
-                         onerror="this.src='https://placehold.co/600x400/111/333?text=Product'">
-                    <h3 class="text-lg font-bold">OUTLINE - MY AGENCY</h3>
-                    <p class="text-gray-400 text-sm mt-1 mb-3">An all-round Creative Production Agency focused on High-End Branded Films.</p>
-                    <span class="font-medium text-white group-hover:underline">DISCOVER</span>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="py-16 md:py-24 border-t border-gray-800">
-        <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-5 gap-12">
-                <!-- Logo (newsletter removed) -->
-                <div class="md:col-span-2 lg:col-span-2">
-                    <a href="#" class="block mb-6">
-                        <img src="NRCLOGO_v2.png" alt="Noam R.C. Logo" class="h-16 w-auto">
-                    </a>
-                </div>
-                
-                <!-- Contact -->
-                <div class="md:col-span-1">
-                    <h4 class="font-semibold text-lg mb-4">CONTACT</h4>
-                    <ul class="space-y-3">
-                        <li><a href="mailto:info@reilinjoey.com" class="text-gray-400 hover:text-white transition-colors text-sm">Business inquiries</a></li>
-                        <li><a href="mailto:orders@reilinjoey.com" class="text-gray-400 hover:text-white transition-colors text-sm">Support</a></li>
-                    </ul>
-                </div>
-
-                <!-- Links -->
-                <div class="md:col-span-1">
-                    <h4 class="font-semibold text-lg mb-4">LINKS</h4>
-                    <ul class="space-y-3">
-                        <li><a href="https://www.youtube.com/@Noam628/videos" class="text-gray-400 hover:text-white transition-colors text-sm">YouTube</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors text-sm">Instagram</a></li>
-                    </ul>
-                </div>
-
-                <!-- Legal -->
-                <div class="md:col-span-1">
-                    <h4 class="font-semibold text-lg mb-4">LEGAL</h4>
-                    <ul class="space-y-3">
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors text-sm">Terms & Conditions</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors text-sm">Privacy Policy</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors text-sm">Refund Policy</a></li>
-                    </ul>
+        <section id="posters" class="py-12">
+            <div class="container mx-auto max-w-7xl px-4">
+                <h2 class="text-4xl md:text-5xl mb-8 text-center">NARRATIVE WORK</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <figure class="flex flex-col items-center">
+                        <img src="media/littlethingsposter.png" alt="Little Things poster" class="rounded shadow-lg">
+                        <figcaption class="mt-4 tracking-wider text-gray-300">LITTLE THINGS</figcaption>
+                        <p class="text-gray-400">creator</p>
+                    </figure>
+                    <figure class="flex flex-col items-center">
+                        <img src="media/TBM poster.png" alt="TBM Poster" class="rounded shadow-lg">
+                        <figcaption class="mt-4 tracking-wider text-gray-300">THE BUTTERCUP MAFIA</figcaption>
+                        <p class="text-gray-400">writer - director - editor</p>                        
+                    </figure>
+                    <figure class="flex flex-col items-center">
+                        <img src="https://placehold.co/600x900/111111/FFFFFF?text=SAMPLE+POSTER" alt="Sample Poster" class="rounded shadow-lg">
+                        <figcaption class="mt-4 tracking-wider text-gray-300">SAMPLE POSTER</figcaption>
+                    </figure>
                 </div>
             </div>
-            
-            <!-- Copyright -->
-            <div class="mt-12 pt-8 border-t border-gray-800 text-center">
-                <p class="text-gray-500 text-sm">&copy; 2025 - OUTLINE COLLECTIVE LLC</p>
-            </div>
+        </section>
+    </main>
+
+    <footer class="py-16 border-t border-gray-800">
+        <div class="container mx-auto max-w-7xl px-4 text-center">
+            <img src="media/NRCLOGO_v2.png" alt="Logo" class="h-16 mx-auto mb-6">
+            <p class="text-gray-500 text-sm">2025 - NOAM R.C. FILMS</p>
         </div>
     </footer>
 
-    <!-- Mobile Menu Script -->
     <script>
-        document.getElementById('mobile-menu-button').addEventListener('click', function() {
-            var menu = document.getElementById('mobile-menu');
-            if (menu.classList.contains('hidden')) {
-                menu.classList.remove('hidden');
-            } else {
-                menu.classList.add('hidden');
-            }
-        });
+        fetch('header.html')
+            .then(r => r.text())
+            .then(html => {
+                const container = document.getElementById('header-container');
+                container.innerHTML = html;
 
-        // Fade in hero content on page load
-        window.addEventListener('DOMContentLoaded', function() {
-            setTimeout(function() {
-                document.getElementById('hero-content').classList.add('visible');
-            }, 300); // slight delay for effect
-        });
+                const headerEl = container.querySelector('header');
+                const heroEl = document.getElementById('hero');
 
-        // Header fade out after scrolling past the opening (hero) section
-        (function() {
-            var header = document.querySelector('header');
-            var hero = document.querySelector('section.h-screen');
-            if (!header || !hero) return;
-            function updateHeaderVisibility() {
-                var threshold = hero.offsetHeight - header.offsetHeight;
-                if (window.scrollY > threshold) {
-                    header.classList.add('header-hidden');
-                } else {
-                    header.classList.remove('header-hidden');
+                function updateHeader() {
+                    if (!headerEl || !heroEl) return;
+                    const limit = heroEl.offsetHeight - headerEl.offsetHeight;
+                    if (window.scrollY > limit) {
+                        headerEl.classList.add('header-hidden');
+                    } else {
+                        headerEl.classList.remove('header-hidden');
+                    }
                 }
-            }
-            window.addEventListener('scroll', updateHeaderVisibility, { passive: true });
-            window.addEventListener('resize', updateHeaderVisibility);
-            updateHeaderVisibility();
-        })();
+
+                window.addEventListener('scroll', updateHeader, { passive: true });
+                window.addEventListener('resize', updateHeader);
+                updateHeader();
+            });
+
+        window.addEventListener('DOMContentLoaded', () => {
+            requestAnimationFrame(() => document.getElementById('hero-content').classList.add('visible'));
+        });
     </script>
-
 </body>
-
-</html></html>
+</html>

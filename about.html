@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>About - Noam R.C.</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://use.typekit.net/ehp0bwx.css">
+    <style>
+        body { background:#000; color:#f3f4f6; font-family:"amandine",sans-serif; }
+        h1,h2,h3,h4,h5,h6 { font-family:"bodega-serif",serif; font-weight:300; letter-spacing:.05em; text-transform:uppercase; }
+        header, header * { font-family:"amandine",sans-serif; font-weight:300; }
+    </style>
+</head>
+<body class="text-gray-100">
+    <div id="header-container"></div>
+
+    <main class="pt-32 px-4">
+        <section class="max-w-3xl mx-auto text-center">
+            <h1 class="text-5xl md:text-7xl mb-8">About Noam R.C.</h1>
+            <p class="text-lg md:text-xl text-gray-400 mb-6">
+                Noam R.C. is a filmmaker, director and creative focusing on narrative and branded motion.
+            </p>
+            <p class="text-lg md:text-xl text-gray-400 mb-6">
+                Dedicated to cinematic storytelling and high-end visual production across short film, commercial and experimental work.
+            </p>
+        </section>
+    </main>
+
+    <footer class="py-16 border-t border-gray-800 mt-16 text-center">
+        <p class="text-gray-500 text-sm">2025 - NOAM R.C. FILMS</p>
+    </footer>
+
+    <script>
+        fetch('header.html')
+            .then(r => r.text())
+            .then(html => {
+                document.getElementById('header-container').innerHTML = html;
+                var path = location.pathname.split('/').pop() || 'index.html';
+                document.querySelectorAll('#header-container .nav-link').forEach(a=>{
+                    if(a.getAttribute('href')===path){
+                        a.classList.remove('text-gray-300');
+                        a.classList.add('text-white','underline');
+                    }
+                });
+                var btn = document.getElementById('mobile-menu-button');
+                var menu = document.getElementById('mobile-menu');
+                if(btn && menu){
+                    btn.addEventListener('click', ()=> menu.classList.toggle('hidden'));
+                }
+            });
+    </script>
+</body>
+</html>
