@@ -29,15 +29,7 @@
         .group:hover .group-hover\:scale-110 {
             transform: scale(1.1);
         }
-        /* Custom styles for hero logos */
-        .logo-grid img {
-            filter: brightness(0) invert(1);
-            opacity: 0.6;
-            transition: opacity 0.3s ease;
-        }
-        .logo-grid img:hover {
-            opacity: 1;
-        }
+   
         /* Fade-in animation for hero content */
         .fade-in {
             opacity: 0;
@@ -64,6 +56,76 @@
             transform: translateY(-10px);
             pointer-events: none;
         }
+
+        /* Apply "bodega-serif" font to all uppercase titles */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: "bodega-serif", serif;
+            font-weight: 300;
+            font-style: normal;
+            text-transform: uppercase; /* Ensure the text is uppercase */
+        }
+
+        /* Portfolio selections: use Adobe Fonts kit (loaded via the link to use.typekit.net) */
+        /* Replace with the exact family name from your Typekit kit if different */
+        #motion h2,
+        #motion h3,
+        #motion p,
+        #motion a,
+        #posters h2,
+        #posters h3,
+        #posters p,
+        #posters figcaption,
+        #working-on h3,
+        #working-on p {
+            font-family: "bodega-serif", serif !important;
+            font-weight: 300 !important;
+            font-style: normal !important;
+        }
+
+        /* Center portfolio section headings in the middle of the screen */
+        #posters h2,
+        #motion h2,
+        #working-on h2 {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 60vh; /* centers vertically ~middle of viewport — adjust as needed */
+            margin: 0;
+            text-align: center;
+        }
+
+        /* Reduce vertical spacing between all sections */
+        section {
+            padding-top: 1.5rem !important;    /* ~24px */
+            padding-bottom: 1.5rem !important; /* ~24px */
+        }
+
+        /* Override Tailwind section utilities */
+        .py-16 { padding-top: 1.5rem !important; padding-bottom: 1.5rem !important; }
+        .md\:py-24 { padding-top: 1.5rem !important; padding-bottom: 1.5rem !important; }
+
+        /* Reduce bottom margin for section headings */
+        section h2 {
+            margin-bottom: 0.75rem !important; /* ~12px */
+        }
+
+        /* Tighten common grid gaps used in portfolios */
+        .gap-8 { gap: 0.75rem !important; }
+        .gap-x-8 { column-gap: 0.75rem !important; }
+        .gap-y-12 { row-gap: 0.5rem !important; }
+
+        /* Slightly reduce the centered heading block height */
+        #posters h2,
+        #motion h2,
+        #working-on h2 {
+            height: 30vh !important;
+        }
+
+        /* Increase figcaption size in posters by ~2 steps */
+        #posters figcaption {
+            font-size: 1.125rem !important; /* was text-sm (~0.875rem); increased */
+            line-height: 1.2;
+        }
     </style>
 </head>
 <body class="text-gray-100">
@@ -72,18 +134,21 @@
     <header class="fixed top-0 left-0 right-0 z-50">
         <nav class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-5">
             <div class="flex justify-between items-center">
-                <!-- Logo -->
-                <a href="#" class="block">
-                    <img src="NRCLOGO_v2.png" alt="Noam R.C. Logo" class="h-12 w-auto">
-                </a>
-                
-                <!-- Desktop Navigation -->
-                <div class="hidden md:flex items-center space-x-8">
+                <!-- (left side kept empty so logo sits with the nav on the right) -->
+                <div class="flex items-center">
+                    <!-- optional: site title or left content -->
+                </div>
+
+                <!-- Desktop Navigation + Logo (logo moved to the right next to CONTACT) -->
+                <div class="hidden md:flex items-center space-x-6">
                     <a href="#" class="text-sm font-medium text-gray-300 hover:text-white transition-colors">HOME</a>
-                    <a href="#" class="text-sm font-medium text-gray-300 hover:text-white transition-colors">STORE</a>
+                    <a href="#" class="text-sm font-medium text-gray-300 hover:text-white transition-colors">ABOUT</a>
                     <a href="#" class="text-sm font-medium text-gray-300 hover:text-white transition-colors">CONTACT</a>
-                    <a href="#" class="bg-white text-black px-5 py-2 rounded-full text-sm font-medium hover:bg-gray-200 transition-colors">
-                        Join the Community
+                    </a>
+
+                    <!-- Logo placed to the right of the CONTACT button -->
+                    <a href="#" class="block ml-4">
+                        <img src="NRCLOGO_v2.png" alt="Noam R.C. Logo" class="h-12 w-auto">
                     </a>
                 </div>
 
@@ -101,7 +166,6 @@
         <!-- Mobile Menu (Hidden by default) -->
         <div id="mobile-menu" class="hidden md:hidden bg-black py-4">
             <a href="#" class="block text-center text-gray-300 hover:text-white py-2">HOME</a>
-            <a href="#" class="block text-center text-gray-300 hover:text-white py-2">STORE</a>
             <a href="#" class="block text-center text-gray-300 hover:text-white py-2">CONTACT</a>
             <a href="#" class="block text-center w-3/4 mx-auto mt-2 bg-white text-black px-5 py-2 rounded-full text-sm font-medium hover:bg-gray-200 transition-colors">
                 Join the Community
@@ -124,18 +188,28 @@
             </div>
         </section>
 
-        <!-- Client Logos -->
-        <div class="w-full max-w-5xl mx-auto pb-12">
-            <div class="logo-grid grid grid-cols-3 sm:grid-cols-6 gap-8 items-center px-4">
-                <img src="https://placehold.co/100x40/000000/FFFFFF?text=Audi" alt="Audi Logo" class="w-24 h-auto mx-auto" onerror="this.src='https://placehold.co/100x40/000/FFF?text=Audi'">
-                <img src="https://placehold.co/100x40/000000/FFFFFF?text=Ferrari" alt="Ferrari Logo" class="w-24 h-auto mx-auto" onerror="this.src='https://placehold.co/100x40/000/FFF?text=Ferrari'">
-                <img src="https://placehold.co/100x40/000000/FFFFFF?text=Sony" alt="Sony Logo" class="w-24 h-auto mx-auto" onerror="this.src='https://placehold.co/100x40/000/FFF?text=Sony'">
-                <img src="https://placehold.co/100x40/000000/FFFFFF?text=DJI" alt="DJI Logo" class="w-24 h-auto mx-auto" onerror="this.src='https://placehold.co/100x40/000/FFF?text=DJI'">
-                <img src="https://placehold.co/100x40/000000/FFFFFF?text=Apple+Music" alt="Apple Music Logo" class="w-24 h-auto mx-auto" onerror="this.src='https://placehold.co/100x40/000/FFF?text=Apple+Music'">
-                <img src="https://placehold.co/100x40/000000/FFFFFF?text=Polestar" alt="Polestar Logo" class="w-24 h-auto mx-auto" onerror="this.src='https://placehold.co/100x40/000/FFF?text=Polestar'">
+    <!-- Posters (Portfolio) Section -->
+    <section id="posters" class="py-16 md:py-24">
+        <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl md:text-5xl font-black tracking-tighter mb-12">NARRATIVE WORK</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
+                <figure class="flex flex-col items-center">
+                    <img src="littlethingsposter.png" alt="Little Things poster" class="rounded shadow-lg" style="width: auto; height: auto; max-width: 100%; max-height: 100%;">
+                    <figcaption class="mt-4 text-sm tracking-wider uppercase text-gray-300">LITTLE THINGS</figcaption>
+                     <p class="text-gray-400 text-sm">creator</p>
+                     
+                </figure>
+                <figure class="flex flex-col items-center">
+                    <img src="https://placehold.co/600x900/111111/FFFFFF?text=COMING+SOON" alt="Coming Soon" class="rounded shadow-lg" style="width: auto; height: auto; max-width: 100%; max-height: 100%;">
+                    <figcaption class="mt-4 text-sm tracking-wider uppercase text-gray-300">COMING SOON</figcaption>
+                </figure>
+                <figure class="flex flex-col items-center">
+                    <img src="https://placehold.co/600x900/111111/FFFFFF?text=SAMPLE+POSTER" alt="Sample Poster" class="rounded shadow-lg" style="width: auto; height: auto; max-width: 100%; max-height: 100%;">
+                    <figcaption class="mt-4 text-sm tracking-wider uppercase text-gray-300">SAMPLE POSTER</figcaption>
+                </figure>
             </div>
         </div>
-    </main>
+    </section>
 
     <!-- Motion (Portfolio) Section -->
     <section id="motion" class="py-16 md:py-24">
@@ -212,7 +286,7 @@
         </div>
     </section>
 
-    <!-- "What I'm Working On" Section -->
+    <!-- "What I'm Working On" (portfolio) Section -->
     <section id="working-on" class="py-16 md:py-24 bg-gray-900 bg-opacity-40">
         <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <h2 class="text-4xl md:text-5xl font-black tracking-tighter mb-12">WHAT I'M WORKING ON</h2>
@@ -247,51 +321,6 @@
                     <p class="text-gray-400 text-sm mt-1 mb-3">An all-round Creative Production Agency focused on High-End Branded Films.</p>
                     <span class="font-medium text-white group-hover:underline">DISCOVER</span>
                 </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Posters Section -->
-    <section id="posters" class="py-16 md:py-24">
-        <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <h2 class="sr-only">Posters</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
-                <figure class="flex flex-col items-center">
-                    <img src="littlethingsposter.png" alt="Little Things poster" class="w-full max-w-sm rounded shadow-lg">
-                    <figcaption class="mt-4 text-sm tracking-wider uppercase text-gray-300">LITTLE THINGS</figcaption>
-                </figure>
-            </div>
-        </div>
-    </section>
-
-    <!-- NARRATIVE FILMS (new portfolio section) -->
-    <section id="narrative-films" class="py-16 md:py-24">
-        <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <h2 class="text-4xl md:text-5xl font-black tracking-tighter mb-12">NARRATIVE FILMS</h2>
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-                <article class="group">
-                    <div class="overflow-hidden rounded-lg">
-                        <img src="littlethingsposter.png" alt="Little Things" class="w-full h-64 object-cover transform transition-transform duration-500 ease-in-out group-hover:scale-105">
-                    </div>
-                    <h3 class="text-lg font-semibold mt-4">LITTLE THINGS</h3>
-                    <p class="text-gray-400 text-sm uppercase tracking-wider">POSTER / NARRATIVE</p>
-                </article>
-
-                <article class="group">
-                    <div class="overflow-hidden rounded-lg bg-gray-800">
-                        <img src="https://placehold.co/600x900/111111/FFFFFF?text=COMING+SOON" alt="Coming Soon" class="w-full h-64 object-cover transform transition-transform duration-500 ease-in-out group-hover:scale-105">
-                    </div>
-                    <h3 class="text-lg font-semibold mt-4">COMING SOON</h3>
-                    <p class="text-gray-400 text-sm uppercase tracking-wider">POSTER / NARRATIVE</p>
-                </article>
-
-                <article class="group">
-                    <div class="overflow-hidden rounded-lg bg-gray-800">
-                        <img src="https://placehold.co/600x900/111111/FFFFFF?text=SAMPLE+POSTER" alt="Sample Poster" class="w-full h-64 object-cover transform transition-transform duration-500 ease-in-out group-hover:scale-105">
-                    </div>
-                    <h3 class="text-lg font-semibold mt-4">SAMPLE POSTER</h3>
-                    <p class="text-gray-400 text-sm uppercase tracking-wider">POSTER / NARRATIVE</p>
-                </article>
             </div>
         </div>
     </section>
@@ -381,4 +410,5 @@
     </script>
 
 </body>
-</html>
+
+</html></html>
