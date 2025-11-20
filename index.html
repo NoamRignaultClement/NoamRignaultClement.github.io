@@ -15,6 +15,23 @@
         .fade-in.visible { opacity:1; filter:blur(0); }
         #posters figure img { transition:transform .5s cubic-bezier(.22,.8,.28,1), box-shadow .3s; cursor:pointer; }
         #posters figure:hover img { transform:scale(1.05); box-shadow:0 20px 40px rgba(0,0,0,.6); }
+        #posters { margin-bottom: 6rem; }
+        @media (min-width: 768px) {
+          #posters h2 { margin-top: 5rem; margin-bottom: 7rem; }
+          #posters { margin-bottom: 5rem; }
+        }
+        /* Scroll fade for NARRATIVE WORK title */
+        .scroll-fade {
+          opacity:0;
+          filter:blur(18px);
+          transform:translateY(24px);
+          transition: opacity .8s ease, filter .8s ease, transform .8s ease;
+        }
+        .scroll-fade.visible {
+          opacity:1;
+          filter:blur(0);
+          transform:translateY(0);
+        }
     </style>
 </head>
 <body class="text-gray-100">
@@ -33,21 +50,21 @@
 
         <section id="posters" class="py-12">
             <div class="container mx-auto max-w-7xl px-4">
-                <h2 class="text-4xl md:text-5xl mb-8 text-center">NARRATIVE WORK</h2>
+                <h2 id="narrative-title" class="scroll-fade text-4xl md:text-5xl mb-8 text-center">NARRATIVE WORK</h2>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <figure class="flex flex-col items-center">
                         <img src="media/littlethingsposter.png" alt="Little Things poster" class="rounded shadow-lg">
-                        <figcaption class="mt-4 tracking-wider text-gray-300">LITTLE THINGS</figcaption>
+                        <figcaption class="mt-4 tracking-wider text-gray-300">LITTLE THINGS | 2025</figcaption>
                         <p class="text-gray-400">creator</p>
                     </figure>
                     <figure class="flex flex-col items-center">
                         <img src="media/TBM poster.png" alt="TBM Poster" class="rounded shadow-lg">
-                        <figcaption class="mt-4 tracking-wider text-gray-300">THE BUTTERCUP MAFIA</figcaption>
+                        <figcaption class="mt-4 tracking-wider text-gray-300">THE BUTTERCUP MAFIA | 2025</figcaption>
                         <p class="text-gray-400">writer - director - editor</p>                        
                     </figure>
                     <figure class="flex flex-col items-center">
                         <img src="media/FragmentsPoster.png" alt="Fragments Poster" class="rounded shadow-lg">
-                        <figcaption class="mt-4 tracking-wider text-gray-300">FRAGMENTS</figcaption>
+                        <figcaption class="mt-4 tracking-wider text-gray-300">FRAGMENTS | 2024</figcaption>
 
                     </figure>
                 </div>
@@ -58,7 +75,7 @@
     <footer class="py-16 border-t border-gray-800">
         <div class="container mx-auto max-w-7xl px-4 text-center">
             <img src="media/NRCLOGO_v2.png" alt="Logo" class="h-16 mx-auto mb-6">
-            <p class="text-gray-500 text-sm">2025 - NOAM R.C. FILMS</p>
+            <p class="text-gray-100 text-md tracking-wider">2025 - NOAM R.C.</p>
         </div>
     </footer>
 
@@ -90,6 +107,21 @@
         window.addEventListener('DOMContentLoaded', () => {
             requestAnimationFrame(() => document.getElementById('hero-content').classList.add('visible'));
         });
+        // Intersection fade for NARRATIVE WORK
+        (function(){
+          const title = document.getElementById('narrative-title');
+          if(!title) return;
+          const io = new IntersectionObserver(entries=>{
+            entries.forEach(e=>{
+              if(e.isIntersecting){
+                title.classList.add('visible');
+              } else {
+                title.classList.remove('visible');
+              }
+            });
+          }, { threshold:0.35 });
+          io.observe(title);
+        })();
     </script>
 </body>
 </html>
