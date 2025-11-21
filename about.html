@@ -14,41 +14,32 @@
 </head>
 <body class="text-gray-100" style="padding-top:88px;">
     <div id="header-container"></div>
-
-    <main class="pt-32 px-4">
-        <section class="max-w-3xl mx-auto text-center">
-            <h1 class="text-5xl md:text-7xl mb-8">About Noam R.C.</h1>
-            <p class="text-lg md:text-xl text-gray-400 mb-6">
-                Noam R.C. is a filmmaker, director and creative focusing on narrative and branded motion.
-            </p>
-            <p class="text-lg md:text-xl text-gray-400 mb-6">
-                Dedicated to cinematic storytelling and high-end visual production across short film, commercial and experimental work.
-            </p>
+    <main class="px-4 md:px-8 pt-12 md:pt-20">
+        <section class="max-w-7xl mx-auto flex flex-col md:flex-row md:items-start md:space-x-12">
+            <!-- Left: 9:16 vertical placeholder -->
+            <figure class="md:w-5/12 w-full mb-10 md:mb-0 flex justify-center">
+                <div class="w-[280px] md:w-[340px] aspect-[9/16] bg-black rounded-lg overflow-hidden ring-2 ring-gray-700 shadow-lg flex items-center justify-center">
+                    <img src="https://placehold.co/540x960/111111/FFFFFF?text=HEADSHOT+9:16" alt="Vertical headshot placeholder" class="w-full h-full object-cover">
+                </div>
+                <figcaption class="sr-only">Headshot Placeholder</figcaption>
+            </figure>
+            <!-- Right: Text content -->
+            <div class="md:w-7/12 w-full text-center md:text-left">
+                <h1 class="text-5xl md:text-7xl mb-8">About
+                </h1>
+                <p class="text-lg md:text-xl text-gray-400 mb-6">
+Noam Rignault Clement is a French-American 18-year-old filmmaker who currently attends UC Berkeley. As a writer, director, cinematographer, and editor, he has worked on numerous narrative films, including Little Things (2025), The Buttercup Mafia (2025), The Wooden Heart (2024), and Fragments (2024). With a lifelong fascination for film, Noam has worked on award-winning narrative films, client work for various companies, and travel documentaries.            </div>
         </section>
     </main>
-
-    <footer class="py-16 border-t border-gray-800 mt-16 text-center">
-        <p class="text-gray-500 text-sm">2025 - NOAM R.C. FILMS</p>
+    <footer class="mt-24 py-16 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <img src="media/NRCLOGO_v2.png" alt="Logo" class="h-16 mx-auto mb-6">
+            <p class="text-gray-400 text-sm tracking-wider">2025 - NOAM R.C.</p>
+        </div>
     </footer>
 
     <script>
-        fetch('header.html')
-            .then(r => r.text())
-            .then(html => {
-                document.getElementById('header-container').innerHTML = html;
-                var path = location.pathname.split('/').pop() || 'index.html';
-                document.querySelectorAll('#header-container .nav-link').forEach(a=>{
-                    if(a.getAttribute('href')===path){
-                        a.classList.remove('text-gray-300');
-                        a.classList.add('text-white','underline');
-                    }
-                });
-                var btn = document.getElementById('mobile-menu-button');
-                var menu = document.getElementById('mobile-menu');
-                if(btn && menu){
-                    btn.addEventListener('click', ()=> menu.classList.toggle('hidden'));
-                }
-            });
+        fetch('header.html').then(r=>r.text()).then(h=>{document.getElementById('header-container').innerHTML=h;});
     </script>
 </body>
 </html>
