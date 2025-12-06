@@ -10,6 +10,11 @@
         body { background:#000; color:#f3f4f6; font-family:"amandine",sans-serif; }
         h1,h2,h3,h4,h5,h6 { font-family:"bodega-serif",serif; font-weight:300; letter-spacing:.05em; text-transform:uppercase; }
         header, header * { font-family:"amandine",sans-serif; font-weight:300; }
+        /* Increase spacing between lines in About section */
+        .about-text p {
+            line-height: 1.85;   /* more line spacing */
+            margin-bottom: 1.25rem; /* extra space between paragraphs */
+        }
     </style>
 </head>
 <body class="text-gray-100" style="padding-top:88px;">
@@ -24,14 +29,14 @@
                 <figcaption class="sr-only">Headshot Placeholder</figcaption>
             </figure>
             <!-- Right: Text content -->
-            <div class="md:w-7/12 w-full text-center md:text-left">
+            <div class="md:w-7/12 w-full text-center md:text-left about-text">
                 <h1 class="text-5xl md:text-7xl mb-8">About</h1>
                 <p class="text-lg md:text-xl text-gray-400 mb-6">
-Noam Rignault Clement is a French-American 18-year-old filmmaker who currently attends UC Berkeley. With a focus on freelance commercial work and narrative films, Noam implements his various skills in cinematography, editing,
-directing, and writing into his work.
+                <span class="text-white">Noam Rignault Clement</span> is a French-American 18-year-old filmmaker who attends <span class="text-white">UC Berkeley</span>. With a focus on freelance <span class="text-white">commercial work</span> and <span class="text-white">narrative films</span>, Noam implements his various skills in cinematography, editing,
+                 directing, and writing into his work.
                 </p>
                 <p class="text-lg md:text-xl text-gray-400 mb-6">
-The most prominent themes present in Noam’s narrative films are the themes of childhood and growing up. His films that feature these ideas most prominently include Little Things (2025), The Buttercup Mafia (2025), The Wooden Heart (2024), and Fragments (2024).
+                The strongest themes present in Noam’s narrative films are the themes of childhood and growing up. His films that feature these ideas most prominently include <span class="text-white">Little Things</span> (2025), <span class="text-white">The Buttercup Mafia</span> (2025), <span class="text-white">The Wooden Heart</span> (2024), and <span class="text-white">Fragments</span> (2024).
                 </p>
             </div>
         </section>
