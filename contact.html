@@ -23,47 +23,40 @@
   <div id="header-container"></div>
 
 <main class="pt-20 md:pt-24">
-    <section class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-10">
-      <div>
-        <h1 class="text-5xl md:text-6xl mb-8">CONTACT</h1>
-        <p class="text-lg md:text-xl text-gray-400 mb-6 max-w-xs md:max-w-sm leading-relaxed">
-          For collaborations, commercial work, or narrative projects in the bay area, send a message below.
-        </p>
-        <div class="flex items-center gap-4">
-          <!-- Email icon -->
-          <a href="mailto:noam.rignault@gmail.com" class="inline-flex items-center justify-center w-10 h-10 rounded-full border border-gray-700 hover:bg-gray-800 transition" aria-label="Email">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path d="M3 6.75A2.75 2.75 0 0 1 5.75 4h12.5A2.75 2.75 0 0 1 21 6.75v10.5A2.75 2.75 0 0 1 18.25 20H5.75A2.75 2.75 0 0 1 3 17.25V6.75Z"/>
-              <path d="M4 7l8 6 8-6"/>
-            </svg>
-          </a>
-          <!-- Instagram icon -->
-          <a href="https://instagram.com/noam.films" target="_blank" rel="noopener" class="inline-flex items-center justify-center w-10 h-10 rounded-full border border-gray-700 hover:bg-gray-800 transition" aria-label="Instagram">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="1.5">
-              <rect x="3" y="3" width="18" height="18" rx="5" ry="5"></rect>
-              <path d="M16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0Z"></path>
-              <circle cx="17.5" cy="6.5" r="1.25" fill="currentColor" stroke="none"></circle>
-            </svg>
-          </a>
-        </div>
-      </div>
-
-      <!-- Right: film stills placeholder -->
-      <div class="hidden md:block">
-        <div class="grid grid-cols-2 gap-4">
-          <div class="w-full aspect-[16/9] bg-black rounded-lg ring-2 ring-gray-700 shadow-lg overflow-hidden">
-            <img src="https://placehold.co/960x540/111111/FFFFFF?text=STILL+1" alt="Film still placeholder 1" class="w-full h-full object-cover">
-          </div>
-          <div class="w-full aspect-[16/9] bg-black rounded-lg ring-2 ring-gray-700 shadow-lg overflow-hidden">
-            <img src="https://placehold.co/960x540/111111/FFFFFF?text=STILL+2" alt="Film still placeholder 2" class="w-full h-full object-cover">
-          </div>
-          <div class="w-full aspect-[16/9] bg-black rounded-lg ring-2 ring-gray-700 shadow-lg overflow-hidden col-span-2">
-            <img src="https://placehold.co/1280x720/111111/FFFFFF?text=STILL+3" alt="Film still placeholder 3" class="w-full h-full object-cover">
+  <section class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex justify-center">
+    <!-- Centered grid with contact replacing STILL 1 -->
+    <div class="hidden md:block">
+      <div class="grid grid-cols-2 gap-4 justify-items-center">
+        <!-- Contact section in place of STILL 1 -->
+        <div class="w-full bg-[#0b0b0b] border border-gray-800 rounded-xl p-6 shadow flex flex-col items-start">
+          <h1 class="text-4xl md:text-5xl mb-4">CONTACT</h1>
+          <p class="text-base md:text-lg text-gray-400 mb-4 max-w-[14rem] md:max-w-[16rem] font-bold leading-loose">
+            Contact me below for commercial work or collaborations in narrative films within the Bay Area.
+          </p>
+          <div class="flex items-center gap-4">
+            <!-- Instagram icon -->
+            <a href="https://instagram.com/noam.films" target="_blank" rel="noopener"
+               class="inline-flex items-center justify-center w-10 h-10 rounded-full border border-gray-700 hover:bg-gray-800 transition"
+               aria-label="Instagram">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                   class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="1.5">
+                <rect x="3" y="3" width="18" height="18" rx="5" ry="5"></rect>
+                <path d="M16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0Z"></path>
+                <circle cx="17.5" cy="6.5" r="1.25" fill="currentColor" stroke="none"></circle>
+              </svg>
+            </a>
           </div>
         </div>
-      </div>
-    </section>
-  </main>
+         <div class="w-full aspect-[16/9] bg-black rounded-lg ring-2 ring-gray-700 shadow-lg overflow-hidden">
+           <img src="https://placehold.co/960x540/111111/FFFFFF?text=STILL+2" alt="Film still placeholder 2" class="w-full h-full object-cover">
+         </div>
+         <div class="w-full aspect-[16/9] bg-black rounded-lg ring-2 ring-gray-700 shadow-lg overflow-hidden col-span-2">
+           <img src="https://placehold.co/1280x720/111111/FFFFFF?text=STILL+3" alt="Film still placeholder 3" class="w-full h-full object-cover">
+         </div>
+       </div>
+     </div>
+   </section>
+</main>
 
   <footer class="mt-24 py-16 border-t border-gray-800">
     <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
