@@ -7,24 +7,68 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://use.typekit.net/ehp0bwx.css">
     <style>
+        /* Base styles */
         body { background:#000; color:#f3f4f6; font-family:"amandine",sans-serif; }
         h1,h2,h3,h4,h5,h6 { font-family:"bodega-serif",serif; font-weight:300; letter-spacing:.05em; text-transform:uppercase; }
         header, header * { font-family:"amandine",sans-serif; font-weight:300; }
+        
+        /* Layout fix for fixed header */
+        body { padding-top: 88px; }
+        
         /* Increase spacing between lines in About section */
         .about-text p {
             line-height: 1.85;   /* more line spacing */
             margin-bottom: 1.25rem; /* extra space between paragraphs */
         }
+
+        /* Header Classes for scroll logic (copied from index) */
+        header { transition: opacity .6s ease, transform .6s ease; }
+        .header-fade { opacity:0; transform:translateY(-12px); pointer-events:none; } 
     </style>
 </head>
-<body class="text-gray-100" style="padding-top:88px;">
-    <div id="header-container"></div>
+<body class="text-gray-100">
+
+    <!-- HEADER INTEGRATION START -->
+    <!-- Content copied and fixed from index.html -->
+    <header class="fixed top-0 left-0 right-0 z-50">
+        <nav class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-5">
+            <div class="flex justify-end items-center">
+                <div class="hidden md:flex items-center space-x-10">
+                    <!-- FIX: Changed to absolute paths for deployment reliability -->
+                    <a href="/index.html" class="text-base font-medium text-gray-300 hover:text-white hover:font-bold transition-colors">HOME</a>
+                    <a href="/about.html" class="text-base font-medium text-gray-300 hover:text-white hover:font-bold transition-colors">ABOUT</a>
+                    <a href="/contact.html" class="text-base font-medium text-gray-300 hover:text-white hover:font-bold transition-colors">CONTACT</a>
+                    <a href="#" class="block ml-6">
+                        <!-- Path fixed: absolute path -->
+                        <img src="/media/NRCLOGO_v2.png" alt="Noam R.C. Logo" class="h-16 w-auto">
+                    </a>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-white focus:outline-none">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M4 6h16M4 12h16m-7 6h7"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </nav>
+        <div id="mobile-menu" class="hidden md:hidden bg-black/90 py-6">
+            <!-- FIX: Changed to absolute paths for deployment reliability -->
+            <a href="/index.html" class="block text-center text-gray-300 hover:text-white hover:font-bold py-3 text-base">HOME</a>
+            <a href="/about.html" class="block text-center text-gray-300 hover:text-white hover:font-bold py-3 text-base">ABOUT</a>
+            <a href="/contact.html" class="block text-center text-gray-300 hover:text-white hover:font-bold py-3 text-base">CONTACT</a>
+        </div>
+    </header>
+    <!-- HEADER INTEGRATION END -->
+
     <main class="px-4 md:px-8 min-h-[calc(100vh-88px)] flex items-center justify-center">
         <section class="max-w-7xl w-full mx-auto flex flex-col md:flex-row items-center md:items-center md:justify-center md:space-x-12">
-            <!-- Left: 9:16 vertical placeholder -->
+            <!-- Left: Headshot -->
             <figure class="md:w-5/12 w-full mb-10 md:mb-0 flex justify-center">
                 <div class="w-[600px] md:w-[600px] bg-black rounded-lg overflow-hidden ring-2 ring-gray-700 shadow-lg flex items-center justify-center group">
-                    <img src="media/NoamHeadshot.jpg" alt="Noam R.C. headshot" class="w-full h-full object-cover transform transition-transform duration-500 ease-out group-hover:scale-110 [will-change:transform]">
+                    <!-- FIX: Absolute path for image -->
+                    <img src="/media/NoamHeadshot.jpg" alt="Noam R.C. headshot" class="w-full h-full object-cover transform transition-transform duration-500 ease-out group-hover:scale-110 [will-change:transform]">
                 </div>
                 <figcaption class="sr-only">Headshot Placeholder</figcaption>
             </figure>
@@ -43,13 +87,46 @@
     </main>
     <footer class="mt-24 py-16 border-t border-gray-800">
         <div class="max-w-7xl mx-auto px-4 text-center">
-            <img src="media/NRCLOGO_v2.png" alt="Logo" class="h-16 mx-auto mb-6">
+            <!-- FIX: Absolute path for logo -->
+            <img src="/media/NRCLOGO_v2.png" alt="Logo" class="h-16 mx-auto mb-6">
             <p class="text-gray-400 text-sm tracking-wider">2025 - NOAM R.C.</p>
         </div>
     </footer>
 
     <script>
-        fetch('header.html').then(r=>r.text()).then(h=>{document.getElementById('header-container').innerHTML=h;});
+        // --- Header Scroll and Mobile Menu Logic (Integrated) ---
+        (function(){
+            const header = document.querySelector('header');
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            // 1. Header Scroll Fade Logic
+            // Note: This logic might not be highly noticeable on the shorter 'About' page
+            let lastY = window.scrollY;
+
+            function updateHeaderVisibility() {
+                if (!header) return;
+                const y = window.scrollY;
+                
+                // Hide when scrolling down past 200px
+                if (y > 200 && y > lastY) {
+                    header.classList.add('header-fade');
+                }
+                // Show when scrolling up or near top (less than 80px)
+                if (y < lastY || y < 80) {
+                    header.classList.remove('header-fade');
+                }
+                lastY = y;
+            }
+
+            window.addEventListener('scroll', updateHeaderVisibility, { passive: true });
+            updateHeaderVisibility();
+
+            // 2. Mobile Menu Toggle Logic
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        })();
     </script>
 </body>
 </html>
