@@ -1,6 +1,9 @@
 <style>
     header { transition: opacity .6s ease, transform .6s ease; }
-    .header-hidden { opacity:0; transform:translateY(-12px); pointer-events:none; }
+    /* NOTE: The JavaScript references 'header-fade', but the CSS defines 'header-hidden'. */
+    /* I'm keeping your original CSS name for now, but ensure your JS uses the correct class. */
+    .header-fade { opacity:0; transform:translateY(-12px); pointer-events:none; } 
+    /* .header-hidden { opacity:0; transform:translateY(-12px); pointer-events:none; } */
 </style>
 <header class="fixed top-0 left-0 right-0 z-50">
     <nav class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-5">
@@ -10,7 +13,7 @@
                 <a href="about.html" class="text-base font-medium text-gray-300 hover:text-white hover:font-bold transition-colors">ABOUT</a>
                 <a href="contact.html" class="text-base font-medium text-gray-300 hover:text-white hover:font-bold transition-colors">CONTACT</a>
                 <a href="#" class="block ml-6">
-                    <img src="media/NRCLOGO_v2.png" alt="Noam R.C. Logo" class="h-16 w-auto">
+                    <img src="/media/NRCLOGO_v2.png" alt="Noam R.C. Logo" class="h-16 w-auto">
                 </a>
             </div>
             <div class="md:hidden">
@@ -37,7 +40,7 @@
         const y = window.scrollY;
         // fade out when scrolling down past 200px
         if (y > 200 && y > lastY) {
-            header.classList.add('header-fade');
+            header.classList.add('header-fade'); // Uses 'header-fade'
         }
         // show when scrolling up or near top
         if (y < lastY || y < 80) {
