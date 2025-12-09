@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Noam R.C. - Filmmaker</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://use.typekit.net/ehp0bwx.css">
+    <style>
+        body { background:#000; color:#f3f4f6; font-family:"amandine",sans-serif; -webkit-font-smoothing:antialiased; }
+        h1,h2,h3,h4,h5,h6 { font-family:"bodega-serif",serif; font-weight:300; letter-spacing:.05em;}
+        header, header * { font-family:"amandine",sans-serif; font-weight:300; }
+        figcaption { font-family:"bodega-serif",serif; font-size: 30px; font-weight:300; letter-spacing:.5em;}
+        .fade-in { opacity:0; filter:blur(20px); transition:opacity 1.2s ease, filter 1.2s ease; }
+        .fade-in.visible { opacity:1; filter:blur(0); }
+        #posters figure img { transition:transform .5s cubic-bezier(.22,.8,.28,1), box-shadow .3s; cursor:pointer; }
+        #posters figure:hover img { transform:scale(1.05); box-shadow:0 20px 40px rgba(0,0,0,.6); }
+        #posters { margin-bottom: 6rem; }
+        @media (min-width: 768px) {
+          #posters h2 { margin-top: 5rem; margin-bottom: 7rem; }
+          #posters { margin-bottom: 5rem; }
+        }
+        /* Scroll fade for NARRATIVE WORK title */
+        .scroll-fade {
+          opacity:0;
+          filter:blur(18px);
+          transform:translateY(24px);
+          transition: opacity .8s ease, filter .8s ease, transform .8s ease;
+        }
+        .scroll-fade.visible {
+          opacity:1;
+          filter:blur(0);
+          transform:translateY(0);
+        }
+    </style>
+</head>
+<body class="text-gray-100">
+    <div id="header-container"></div>
+
+    <main>
+        <section id="hero" class="h-screen min-h-[700px] flex flex-col justify-center items-center text-center pt-16 px-4 relative overflow-hidden">
+            <video autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover z-0" style="pointer-events:none;">
+                <source src="/assets/Website%20v1-BgP-vFel.mp4" type="video/mp4">
+            </video>
+            <div id="hero-content" class="fade-in relative z-10">
+                <h1 class="noam-title md:text-9xl tracking-tighter font-normal">NOAM R.C.</h1>
+                <p class="text-xl md:text-xl text-gray-400 mt- tracking-wide">bay area filmmaker</p>
+            </div>
+        </section>
+
+        <section id="posters" class="py-12">
+            <div class="container mx-auto max-w-7xl px-4">
+                <h2 id="narrative-title" class="scroll-fade text-4xl md:text-5xl mb-8 text-center">NARRATIVE WORK</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <figure class="flex flex-col items-center">
+                        <img src="/assets/LittleThingsPoster-DxmgpRF2.png" alt="Little Things poster" class="rounded shadow-lg">
+                        <figcaption class="mt-4 tracking-wider text-gray-300">LITTLE THINGS | 2025</figcaption>
+                        <p class="text-gray-400">creator</p>
+                    </figure>
+                    <figure class="flex flex-col items-center">
+                        <img src="/assets/TBM%20poster-SrPjxpJ6.png" alt="TBM Poster" class="rounded shadow-lg">
+                        <figcaption class="mt-4 tracking-wider text-gray-300">THE BUTTERCUP MAFIA | 2025</figcaption>
+                        <p class="text-gray-400">writer - director - editor</p>                        
+                    </figure>
+                    <figure class="flex flex-col items-center">
+                        <img src="/assets/FragmentsPoster-nEPVHjJJ.png" alt="Fragments Poster" class="rounded shadow-lg">
+                        <figcaption class="mt-4 tracking-wider text-gray-300">FRAGMENTS | 2024</figcaption>
+                        <p class="text-gray-400">writer - director - editor</p> 
+                    </figure>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="py-16 border-t border-gray-800">
+        <div class="container mx-auto max-w-7xl px-4 text-center">
+            <img src="/assets/NRCLOGO_v2-WCiakebK.png" alt="Logo" class="h-16 mx-auto mb-6">
+            <p class="text-gray-100 text-md tracking-wider">2025 - NOAM R.C.</p>
+        </div>
+    </footer>
+
+    <script>
+        fetch('header.html')
+            .then(r => r.text())
+            .then(html => {
+                const container = document.getElementById('header-container');
+                container.innerHTML = html;
+
+                const headerEl = container.querySelector('header');
+                const heroEl = document.getElementById('hero');
+
+                function updateHeader() {
+                    if (!headerEl || !heroEl) return;
+                    const limit = heroEl.offsetHeight - headerEl.offsetHeight;
+                    if (window.scrollY > limit) {
+                        headerEl.classList.add('header-hidden');
+                    } else {
+                        headerEl.classList.remove('header-hidden');
+                    }
+                }
+
+                window.addEventListener('scroll', updateHeader, { passive: true });
+                window.addEventListener('resize', updateHeader);
+                updateHeader();
+            });
+
+        window.addEventListener('DOMContentLoaded', () => {
+            requestAnimationFrame(() => document.getElementById('hero-content').classList.add('visible'));
+        });
+        // Intersection fade for NARRATIVE WORK
+        (function(){
+          const title = document.getElementById('narrative-title');
+          if(!title) return;
+          const io = new IntersectionObserver(entries=>{
+            entries.forEach(e=>{
+              if(e.isIntersecting){
+                title.classList.add('visible');
+              } else {
+                title.classList.remove('visible');
+              }
+            });
+          }, { threshold:0.35 });
+          io.observe(title);
+        })();
+    </script>
+</body>
+</html>
