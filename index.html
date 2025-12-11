@@ -7,6 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Assuming your custom fonts are loading correctly -->
     <link rel="stylesheet" href="https://use.typekit.net/ehp0bwx.css">
+    <link rel="canonical" href="https://noamrc.com/">
     <style>
         /* Base styles */
         body { background:#000; color:#f3f4f6; font-family:"amandine",sans-serif; -webkit-font-smoothing:antialiased; }
@@ -185,6 +186,12 @@
                 mobileMenu.classList.toggle('hidden');
             });
         })();
+
+        // Remove trailing index.html without reload
+        if (location.pathname.endsWith('/index.html')) {
+          const cleaned = location.pathname.replace(/index\.html$/, '');
+          history.replaceState(null, '', cleaned || '/');
+        }
     </script>
 </body>
 </html>
