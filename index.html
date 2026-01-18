@@ -41,6 +41,18 @@
       #posters h2 { margin-top: 5rem; margin-bottom: 7rem; }
       #posters { margin-bottom: 5rem; }
     }
+
+    /* Client boxes hover (same as posters) */
+    #client figure img,
+    #client figure > div {
+      transition: transform .5s cubic-bezier(.22,.8,.28,1), box-shadow .3s;
+      cursor: pointer;
+    }
+    #client figure:hover img,
+    #client figure:hover > div {
+      transform: scale(1.05);
+      box-shadow: 0 20px 40px rgba(0,0,0,.6);
+    }
   </style>
 </head>
 <body class="text-gray-100">
@@ -95,31 +107,31 @@
       </section>
 
       <!-- Client Work (three 16:9 boxes) -->
-      <section id="client" class="pt-3 pb-16">
+      <section id="client" class="pt-3 pb-16 mb-24 md:mb-40">
         <div class="container mx-auto max-w-7xl px-4">
           <h2 id="client-title" class="scroll-fade text-4xl md:text-5xl mb-32 text-center">CLIENT WORK</h2>
           <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
             <figure class="flex flex-col items-center">
-              <div class="w-full aspect-[16/9] rounded-lg bg-black/40 border border-gray-700 overflow-hidden flex items-center justify-center">
-                <span class="text-gray-400 tracking-widest text-sm">CLIENT SLOT</span>
+              <div class="w-full aspect-[16/9] rounded-lg overflow-hidden">
+                <img src="/public/media/Jameswareframe2.webp" alt="Jameswear" class="w-full h-full object-cover">
               </div>
-              <figcaption class="mt-4 tracking-wider text-gray-300">PROJECT TITLE | YEAR</figcaption>
-              <p class="text-gray-400">role</p>
+               <figcaption class="mt-4 tracking-wider text-gray-300"> JAMESWEAR </figcaption>
+               <p class="text-gray-400">commercial</p>
             </figure>
             <figure class="flex flex-col items-center">
-              <div class="w-full aspect-[16/9] rounded-lg bg-black/40 border border-gray-700 overflow-hidden flex items-center justify-center">
-                <span class="text-gray-400 tracking-widest text-sm">CLIENT SLOT</span>
+              <div class="w-full aspect-[16/9] rounded-lg overflow-hidden">
+                <img src="/public/media/frame3.webp" alt="Volkswagen" class="w-full h-full object-cover">
               </div>
-              <figcaption class="mt-4 tracking-wider text-gray-300">PROJECT TITLE | YEAR</figcaption>
-              <p class="text-gray-400">role</p>
+               <figcaption class="mt-4 tracking-wider text-gray-300"> VOLKSWAGEN</figcaption>
+               <p class="text-gray-400">spec ad</p>
             </figure>
             <figure class="flex flex-col items-center">
-              <div class="w-full aspect-[16/9] rounded-lg bg-black/40 border border-gray-700 overflow-hidden flex items-center justify-center">
-                <span class="text-gray-400 tracking-widest text-sm">CLIENT SLOT</span>
+              <div class="w-full aspect-[16/9] rounded-lg overflow-hidden">
+                <img src="/public/media/MarinTreks.webp" alt="Marin Treks" class="w-full h-full object-cover">
               </div>
-              <figcaption class="mt-4 tracking-wider text-gray-300">PROJECT TITLE | YEAR</figcaption>
-              <p class="text-gray-400">role</p>
-            </figure>
+               <figcaption class="mt-4 tracking-wider text-gray-300">MARIN TREKS</figcaption>
+               <p class="text-gray-400">commercial</p>
+             </figure>
           </div>
         </div>
       </section>
@@ -144,6 +156,20 @@
       const mobileBtn = header?.querySelector('#mobile-menu-button');
       const mobileMenu = header?.querySelector('#mobile-menu');
       mobileBtn?.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+
+      // Fade header out when scrolling down past a threshold; show when scrolling up or near top
+      let lastY = window.scrollY;
+      const onScroll = () => {
+        const y = window.scrollY;
+        if (y > 120 && y > lastY) {
+          header?.classList.add('header-fade');
+        } else if (y < lastY || y < 80) {
+          header?.classList.remove('header-fade');
+        }
+        lastY = y;
+      };
+      onScroll();
+      window.addEventListener('scroll', onScroll, { passive: true });
     })();
 
     // Ensure hero text appears
