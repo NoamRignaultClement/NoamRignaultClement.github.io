@@ -62,7 +62,7 @@
       <section id="posters" class="py-12">
           <div class="container mx-auto max-w-7xl px-4">
               <h2 id="narrative-title" class="scroll-fade text-4xl md:text-5xl mb-8 text-center">NARRATIVE WORK</h2>
-              <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
                   <figure class="flex flex-col items-center">
                       <!-- Path fixed: absolute path -->
                       <img src="/public/media/LittleThingsPoster.png" alt="Little Things poster" class="rounded shadow-lg">
@@ -81,8 +81,47 @@
                       <figcaption class="mt-4 tracking-wider text-gray-300">FRAGMENTS | 2024</figcaption>
                       <p class="text-gray-400">writer - director - editor</p> 
                   </figure>
+                  <!-- Fourth poster slot -->
+                  <figure class="flex flex-col items-center">
+                      <!-- Replace the placeholder box below with your fourth poster image -->
+                      <div class="w-full aspect-[2/3] rounded shadow-lg bg-black/40 border border-gray-700 flex items-center justify-center">
+                          <span class="text-gray-400 tracking-widest text-sm">POSTER SLOT</span>
+                      </div>
+                      <figcaption class="mt-4 tracking-wider text-gray-300">TITLE | YEAR</figcaption>
+                      <p class="text-gray-400">role</p>
+                  </figure>
               </div>
           </div>
+      </section>
+
+      <!-- Client Work (three 16:9 boxes) -->
+      <section id="client" class="pt-3 pb-16">
+        <div class="container mx-auto max-w-7xl px-4">
+          <h2 id="client-title" class="scroll-fade text-4xl md:text-5xl mb-32 text-center">CLIENT WORK</h2>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <figure class="flex flex-col items-center">
+              <div class="w-full aspect-[16/9] rounded-lg bg-black/40 border border-gray-700 overflow-hidden flex items-center justify-center">
+                <span class="text-gray-400 tracking-widest text-sm">CLIENT SLOT</span>
+              </div>
+              <figcaption class="mt-4 tracking-wider text-gray-300">PROJECT TITLE | YEAR</figcaption>
+              <p class="text-gray-400">role</p>
+            </figure>
+            <figure class="flex flex-col items-center">
+              <div class="w-full aspect-[16/9] rounded-lg bg-black/40 border border-gray-700 overflow-hidden flex items-center justify-center">
+                <span class="text-gray-400 tracking-widest text-sm">CLIENT SLOT</span>
+              </div>
+              <figcaption class="mt-4 tracking-wider text-gray-300">PROJECT TITLE | YEAR</figcaption>
+              <p class="text-gray-400">role</p>
+            </figure>
+            <figure class="flex flex-col items-center">
+              <div class="w-full aspect-[16/9] rounded-lg bg-black/40 border border-gray-700 overflow-hidden flex items-center justify-center">
+                <span class="text-gray-400 tracking-widest text-sm">CLIENT SLOT</span>
+              </div>
+              <figcaption class="mt-4 tracking-wider text-gray-300">PROJECT TITLE | YEAR</figcaption>
+              <p class="text-gray-400">role</p>
+            </figure>
+          </div>
+        </div>
       </section>
   </main>
 
@@ -123,6 +162,17 @@
         });
       }, { threshold: 0.25 });
       io.observe(title);
+
+      // Reveal Client Work title on scroll
+      const clientTitle = document.getElementById('client-title');
+      if (clientTitle) {
+        const io2 = new IntersectionObserver(entries => {
+          entries.forEach(e => {
+            if (e.isIntersecting) clientTitle.classList.add('visible');
+          });
+        }, { threshold: 0.25 });
+        io2.observe(clientTitle);
+      }
     })();
 
     // Keep homepage URL clean if someone lands on /index.html
