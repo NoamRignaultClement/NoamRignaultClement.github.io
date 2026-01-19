@@ -197,17 +197,15 @@
       const mobileMenu = header?.querySelector('#mobile-menu');
       mobileBtn?.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
 
-      // Fade header out when scrolling down past a threshold; show when scrolling up or near top
-      let lastY = window.scrollY;
-      const onScroll = () => {
-        const y = window.scrollY;
-        if (y > 120 && y > lastY) {
-          header?.classList.add('header-fade');
-        } else if (y < lastY || y < 80) {
-          header?.classList.remove('header-fade');
-        }
-        lastY = y;
-      };
+     // Hide header once you leave the top; only show again at the very top
+     const onScroll = () => {
+       const y = window.scrollY;
+       if (y <= 10) {
+         header?.classList.remove('header-fade'); // visible at top
+       } else {
+         header?.classList.add('header-fade'); // hidden elsewhere
+       }
+     };
       onScroll();
       window.addEventListener('scroll', onScroll, { passive: true });
     })();
@@ -257,4 +255,4 @@
     }
   </script>
 </body>
-</html>
+  </script></body></html>
