@@ -29,6 +29,9 @@
       transform:translateY(0);
     }
 
+    /* Make the arrow fade in more slowly */
+    #scroll-down.fade-in { transition: opacity 2.8s ease, filter 2.8s ease; }
+
     /* Header Classes */
     header { transition: opacity .6s ease, transform .6s ease; }
     .header-fade { opacity:0; transform:translateY(-12px); pointer-events:none; } 
@@ -68,46 +71,77 @@
     </video>
     <div id="hero-content" class="fade-in relative z-10">
       <img src="public/media/NoamRC.webp" alt="NOAM R.C." class="mx-auto w-[70%] sm:w-[30%] h-auto">
-       <p class="text-xl md:text-xl text-gray-400 mt-5 tracking-">bay area filmmaker</p>
+      <p class="text-xl md:text-xl text-gray-400 mt-5 tracking-">bay area filmmaker</p>
     </div>
+    <!-- Down arrow to scroll to Narrative section -->
+    <button id="scroll-down" aria-label="Scroll to Narrative Work"
+            class="fade-in absolute bottom-8 left-1/2 -translate-x-1/2 z-10 inline-flex items-center justify-center w-12 h-12 rounded-full border border-gray-700 bg-black/40 hover:bg-black/60 transition group">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+           class="w-6 h-6 text-white transform transition-transform duration-300 ease-out group-hover:scale-110" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M6 9l6 6 6-6" />
+      </svg>
+    </button>
   </section>
 
       <section id="posters" class="py-12">
           <div class="container mx-auto max-w-7xl px-4">
-              <h2 id="narrative-title" class="scroll-fade text-4xl md:text-5xl mb-8 text-center">NARRATIVE WORK</h2>
-              <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-                  <figure class="flex flex-col items-center">
-                      <!-- Path fixed: absolute path -->
-                      <img src="/public/media/LittleThingsPoster.png" alt="Little Things poster" class="rounded shadow-lg">
-                      <figcaption class="mt-4 tracking-wider text-gray-300">LITTLE THINGS | 2025</figcaption>
-                      <p class="text-gray-400">creator</p>
-                  </figure>
-                  <figure class="flex flex-col items-center">
-                      <!-- Path fixed: absolute path and using TBM-poster.png -->
-                      <a href="https://youtu.be/SHow5jzfGPk?si=5Uar0gGefhQD6C5_" target="_blank" rel="noopener">
-                        <img src="/public/media/TBM-poster.png" alt="TBM Poster" class="rounded shadow-lg">
-                      </a>
-                      <figcaption class="mt-4 tracking-wider text-gray-300">THE BUTTERCUP MAFIA | 2025</figcaption>
-                      <p class="text-gray-400">writer - director - editor</p>                        
-                  </figure>
-                  <figure class="flex flex-col items-center">
-                      <!-- Path fixed: absolute path -->
-                      <a href="https://youtu.be/NeOcDrghCdk?si=x7mjU8FWMs5yhJLe" target="_blank" rel="noopener">
-                        <img src="/public/media/FragmentsPoster.png" alt="Fragments Poster" class="rounded shadow-lg">
-                      </a>
-                      <figcaption class="mt-4 tracking-wider text-gray-300">FRAGMENTS | 2024</figcaption>
-                      <p class="text-gray-400">writer - director - editor</p> 
-                  </figure>
-                  <!-- Fourth poster slot -->
-                  <figure class="flex flex-col items-center">
-                      <!-- Replace the placeholder box below with your fourth poster image -->
-                      <div class="w-full aspect-[2/3] rounded shadow-lg bg-black/40 border border-gray-700 flex items-center justify-center">
-                          <span class="text-gray-400 tracking-widest text-sm">POSTER SLOT</span>
-                      </div>
-                      <figcaption class="mt-4 tracking-wider text-gray-300">TITLE | YEAR</figcaption>
-                      <p class="text-gray-400">role</p>
-                  </figure>
+              <!-- Social icons above Narrative Work -->
+              <div class="flex justify-center items-center gap-4 mb-6">
+                <!-- Instagram -->
+                <a href="https://instagram.com/noam.films" target="_blank" rel="noopener"
+                   class="inline-flex items-center justify-center w-10 h-10 rounded-md border border-gray-700 hover:bg-gray-800 transition"
+                   aria-label="Instagram">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                       class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <rect x="3" y="3" width="18" height="18" rx="5" ry="5"></rect>
+                    <path d="M16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0Z"></path>
+                    <circle cx="17.5" cy="6.5" r="1.25" fill="currentColor" stroke="none"></circle>
+                  </svg>
+                </a>
+                <!-- YouTube -->
+                <a href="https://www.youtube.com/" target="_blank" rel="noopener"
+                   class="inline-flex items-center justify-center w-10 h-10 rounded-md border border-gray-700 hover:bg-gray-800 transition"
+                   aria-label="YouTube">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                       class="w-5 h-5 text-white" fill="currentColor">
+                    <path d="M23.5 6.2a4.5 4.5 0 0 0-3.2-3.2C18.5 2.5 12 2.5 12 2.5s-6.5 0-8.3.5A4.5 4.5 0 0 0 .5 6.2C0 8 0 12 0 12s0 4 .5 5.8a4.5 4.5 0 0 0 3.2 3.2c1.8.5 8.3.5 8.3.5s6.5 0 8.3-.5a4.5 4.5 0 0 0 3.2-3.2C24 16 24 12 24 12s0-4-.5-5.8ZM9.6 15.5V8.5L15.8 12l-6.2 3.5Z"/>
+                  </svg>
+                </a>
               </div>
+               <img id="narrative-title" src="public/media/narrativework.png" alt="Narrative Work" class="scroll-fade mx-auto mb-8 w-[80%] md:w-[30%] h-auto">
+               <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                 <figure class="flex flex-col items-center">
+                   <!-- Path fixed: absolute path -->
+                   <img src="/public/media/LittleThingsPoster.png" alt="Little Things poster" class="rounded shadow-lg">
+                   <figcaption class="mt-4 tracking-wider text-gray-300">LITTLE THINGS | 2025</figcaption>
+                   <p class="text-gray-400">creator</p>
+                 </figure>
+                 <figure class="flex flex-col items-center">
+                   <!-- Path fixed: absolute path and using TBM-poster.png -->
+                   <a href="https://youtu.be/SHow5jzfGPk?si=5Uar0gGefhQD6C5_" target="_blank" rel="noopener">
+                     <img src="/public/media/TBM-poster.png" alt="TBM Poster" class="rounded shadow-lg">
+                   </a>
+                   <figcaption class="mt-4 tracking-wider text-gray-300">THE BUTTERCUP MAFIA | 2025</figcaption>
+                   <p class="text-gray-400">writer - director - editor</p>                        
+                 </figure>
+                 <figure class="flex flex-col items-center">
+                   <!-- Path fixed: absolute path -->
+                   <a href="https://youtu.be/NeOcDrghCdk?si=x7mjU8FWMs5yhJLe" target="_blank" rel="noopener">
+                     <img src="/public/media/FragmentsPoster.png" alt="Fragments Poster" class="rounded shadow-lg">
+                   </a>
+                   <figcaption class="mt-4 tracking-wider text-gray-300">FRAGMENTS | 2024</figcaption>
+                   <p class="text-gray-400">writer - director - editor</p> 
+                 </figure>
+                 <!-- Fourth poster slot -->
+                 <figure class="flex flex-col items-center">
+                     <!-- Replace the placeholder box below with your fourth poster image -->
+                     <div class="w-full aspect-[2/3] rounded shadow-lg bg-black/40 border border-gray-700 flex items-center justify-center">
+                         <span class="text-gray-400 tracking-widest text-sm">POSTER SLOT</span>
+                     </div>
+                     <figcaption class="mt-4 tracking-wider text-gray-300">TITLE | YEAR</figcaption>
+                     <p class="text-gray-400">role</p>
+                 </figure>
+             </div>
           </div>
       </section>
 
@@ -185,6 +219,10 @@
     document.addEventListener('DOMContentLoaded', () => {
       const hero = document.getElementById('hero-content');
       hero?.classList.add('visible');
+      const arrow = document.getElementById('scroll-down');
+      setTimeout(() => {
+       arrow?.classList.add('visible');
+     }, 3000); // delay arrow appearance by 3 seconds
     });
 
     // Bring back "NARRATIVE WORK" fade-in on scroll
@@ -209,6 +247,11 @@
         io2.observe(clientTitle);
       }
     })();
+
+    // Scroll to Narrative section when arrow is clicked
+    document.getElementById('scroll-down')?.addEventListener('click', () => {
+      document.querySelector('#posters')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
 
     // Keep homepage URL clean if someone lands on /index.html
     if (location.pathname.endsWith('/index.html')) {
