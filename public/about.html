@@ -94,38 +94,18 @@
     </footer>
 
     <script>
-        // --- Header Scroll and Mobile Menu Logic (Integrated) ---
+        // Header shows only at top + mobile menu
         (function(){
-            const header = document.querySelector('header');
-            const mobileMenuButton = document.getElementById('mobile-menu-button');
-            const mobileMenu = document.getElementById('mobile-menu');
-            
-            // 1. Header Scroll Fade Logic
-            // Note: This logic might not be highly noticeable on the shorter 'About' page
-            let lastY = window.scrollY;
-
-            function updateHeaderVisibility() {
-                if (!header) return;
-                const y = window.scrollY;
-                
-                // Hide when scrolling down past 200px
-                if (y > 200 && y > lastY) {
-                    header.classList.add('header-fade');
-                }
-                // Show when scrolling up or near top (less than 80px)
-                if (y < lastY || y < 80) {
-                    header.classList.remove('header-fade');
-                }
-                lastY = y;
-            }
-
-            window.addEventListener('scroll', updateHeaderVisibility, { passive: true });
-            updateHeaderVisibility();
-
-            // 2. Mobile Menu Toggle Logic
-            mobileMenuButton.addEventListener('click', () => {
-                mobileMenu.classList.toggle('hidden');
-            });
+          const header = document.querySelector('header');
+          const mobileMenuButton = document.getElementById('mobile-menu-button');
+          const mobileMenu = document.getElementById('mobile-menu');
+          mobileMenuButton?.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+          const onScroll = () => {
+            const y = window.scrollY;
+            if (y <= 10) header?.classList.remove('header-fade'); else header?.classList.add('header-fade');
+          };
+          onScroll();
+          window.addEventListener('scroll', onScroll, { passive: true });
         })();
     </script>
 </body>

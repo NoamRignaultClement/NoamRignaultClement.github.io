@@ -22,6 +22,10 @@
       font-style: normal;
       letter-spacing: 0.2em;
     }
+
+    /* Header fade styles */
+    header { transition: opacity .6s ease, transform .6s ease; }
+    .header-fade { opacity:0; transform:translateY(-12px); pointer-events:none; }
   </style>
 </head>
 <body class="text-gray-100">
@@ -109,15 +113,18 @@
 </footer>
 
     <script>
-        // --- Mobile Menu Toggle Logic ---
-        // Scroll fade logic removed to ensure header is always visible on this short page.
+        // Mobile menu + show header only at top
         (function(){
-            const mobileMenuButton = document.getElementById('mobile-menu-button');
-            const mobileMenu = document.getElementById('mobile-menu');
-            
-            mobileMenuButton.addEventListener('click', () => {
-                mobileMenu.classList.toggle('hidden');
-            });
+          const header = document.querySelector('header');
+          const mobileMenuButton = document.getElementById('mobile-menu-button');
+          const mobileMenu = document.getElementById('mobile-menu');
+          mobileMenuButton?.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+          const onScroll = () => {
+            const y = window.scrollY;
+            if (y <= 10) header?.classList.remove('header-fade'); else header?.classList.add('header-fade');
+          };
+          onScroll();
+          window.addEventListener('scroll', onScroll, { passive: true });
         })();
     </script>
 </body>
