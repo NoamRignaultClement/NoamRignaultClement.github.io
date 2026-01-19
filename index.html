@@ -29,8 +29,8 @@
       transform:translateY(0);
     }
 
-    /* Make the arrow fade in more slowly */
-    #scroll-down.fade-in { transition: opacity 2.8s ease, filter 2.8s ease; }
+    /* Arrow fade-in faster */
+    #scroll-down.fade-in { transition: opacity 1.6s ease, filter 1.6s ease; }
 
     /* Header Classes */
     header { transition: opacity .6s ease, transform .6s ease; }
@@ -39,11 +39,7 @@
     /* Poster Styles */
     #posters figure img { transition:transform .5s cubic-bezier(.22,.8,.28,1), box-shadow .3s; cursor:pointer; }
     #posters figure:hover img { transform:scale(1.05); box-shadow:0 20px 40px rgba(0,0,0,.6); }
-    #posters { margin-bottom: 6rem; }
-    @media (min-width: 768px) {
-      #posters h2 { margin-top: 5rem; margin-bottom: 7rem; }
-      #posters { margin-bottom: 5rem; }
-    }
+    /* Uniform spacing handled with section padding classes */
 
     /* Client boxes hover (same as posters) */
     #client figure img,
@@ -75,7 +71,7 @@
     </div>
     <!-- Down arrow to scroll to Narrative section -->
     <button id="scroll-down" aria-label="Scroll to Narrative Work"
-            class="fade-in absolute bottom-8 left-1/2 -translate-x-1/2 z-10 inline-flex items-center justify-center w-12 h-12 rounded-full border border-gray-700 bg-black/40 hover:bg-black/60 transition group">
+            class="fade-in absolute bottom-8 left-1/2 -translate-x-1/2 z-10 inline-flex items-center justify-center w-12 h-12 rounded-full bg-black/40 hover:bg-black/60 transition group">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
            class="w-6 h-6 text-white transform transition-transform duration-300 ease-out group-hover:scale-110" fill="none" stroke="currentColor" stroke-width="1.5">
         <path d="M6 9l6 6 6-6" />
@@ -148,8 +144,8 @@
       <!-- Client Work (three 16:9 boxes) -->
       <section id="client" class="pt-3 pb-16 mb-24 md:mb-40">
         <div class="container mx-auto max-w-7xl px-4">
-          <h2 id="client-title" class="scroll-fade text-4xl md:text-5xl mb-32 text-center">CLIENT WORK</h2>
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <img id="client-title" src="public/media/clientwork.png" alt="Client Work" class="scroll-fade mx-auto mb-32 w-[80%] md:w-[30%] h-auto">
+           <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
             <figure class="flex flex-col items-center">
               <div class="w-full aspect-[16/9] rounded-lg overflow-hidden">
                 <img src="/public/media/Jameswareframe2.webp" alt="Jameswear" class="w-full h-full object-cover">
@@ -222,7 +218,7 @@
       const arrow = document.getElementById('scroll-down');
       setTimeout(() => {
        arrow?.classList.add('visible');
-     }, 3000); // delay arrow appearance by 3 seconds
+     }, 1000); // delay arrow appearance by 1 seconds
     });
 
     // Bring back "NARRATIVE WORK" fade-in on scroll
