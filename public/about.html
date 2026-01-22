@@ -94,12 +94,22 @@
     </footer>
 
     <script>
-        // Header shows only at top + mobile menu
         (function(){
           const header = document.querySelector('header');
           const mobileMenuButton = document.getElementById('mobile-menu-button');
           const mobileMenu = document.getElementById('mobile-menu');
           mobileMenuButton?.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+
+          // Mark active nav link
+          const currentPath = location.pathname.replace(/\/$/, '') || '/';
+          header?.querySelectorAll('a[href]').forEach(a => {
+            const aPath = new URL(a.href, location.origin).pathname.replace(/\/$/, '') || '/';
+            if (aPath === currentPath || (currentPath === '/index.html' && aPath === '/')) {
+              a.classList.add('font-bold','text-white');
+              a.classList.remove('font-medium');
+            }
+          });
+
           const onScroll = () => {
             const y = window.scrollY;
             if (y <= 10) header?.classList.remove('header-fade'); else header?.classList.add('header-fade');

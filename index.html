@@ -174,15 +174,21 @@
       const mobileMenu = header?.querySelector('#mobile-menu');
       mobileBtn?.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
 
-     // Hide header once you leave the top; only show again at the very top
-     const onScroll = () => {
-       const y = window.scrollY;
-       if (y <= 10) {
-         header?.classList.remove('header-fade'); // visible at top
-       } else {
-         header?.classList.add('header-fade'); // hidden elsewhere
-       }
-     };
+      // Mark active nav link
+      const currentPath = location.pathname.replace(/\/$/, '') || '/';
+      header?.querySelectorAll('a[href]').forEach(a => {
+        const aPath = new URL(a.href, location.origin).pathname.replace(/\/$/, '') || '/';
+        if (aPath === currentPath || (currentPath === '/index.html' && aPath === '/')) {
+          a.classList.add('font-bold','text-white');
+          a.classList.remove('font-medium');
+        }
+      });
+
+      // Hide header off top
+      const onScroll = () => {
+        const y = window.scrollY;
+        if (y <= 10) header?.classList.remove('header-fade'); else header?.classList.add('header-fade');
+      };
       onScroll();
       window.addEventListener('scroll', onScroll, { passive: true });
     })();
