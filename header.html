@@ -35,18 +35,22 @@
 <script>
 (function(){
     const header = document.querySelector('header');
-    let lastY = window.scrollY;
-    window.addEventListener('scroll', () => {
-        const y = window.scrollY;
-        // fade out when scrolling down past 200px
-        if (y > 200 && y > lastY) {
-            header.classList.add('header-fade'); // Uses 'header-fade'
-        }
-        // show when scrolling up or near top
-        if (y < lastY || y < 80) {
+    if (!header) return; // guard: do nothing if header is not present
+
+    const TOP_THRESHOLD = 10; // px from top to consider 'at top'
+
+    // Show header only when at (or very near) the top of the page.
+    function updateHeader() {
+        const y = window.scrollY || window.pageYOffset;
+        if (y <= TOP_THRESHOLD) {
             header.classList.remove('header-fade');
+        } else {
+            header.classList.add('header-fade');
         }
-        lastY = y;
-    }, { passive: true });
+    }
+
+    // initialize state and listen for scroll changes
+    updateHeader();
+    window.addEventListener('scroll', updateHeader, { passive: true });
 })();
 </script>

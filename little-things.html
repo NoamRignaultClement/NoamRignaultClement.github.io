@@ -67,9 +67,10 @@
       max-width:66%;
     }
     .video-title h2{ margin:0 0 0.5rem 0; font-size:clamp(1.25rem,2.6vw,2rem); line-height:1.15; font-weight:600 }
-    .video-title .byline{ margin-top:0.5rem; font-size:clamp(0.85rem,1.6vw,1rem); color:rgba(255,255,255,0.95); line-height:1.35 }
-    .video-title .meta{ margin-top:0.5rem; font-size:0.85rem; color:rgba(255,255,255,0.8); line-height:1.35 }
-    .video-title .synopsis{ margin-top:0.75rem; font-size:clamp(0.85rem,1.4vw,1rem); color:rgba(255,255,255,0.9); line-height:1.45 }
+      .video-title h2{ margin:0 0 0.75rem 0; font-size:clamp(1.25rem,2.6vw,2rem); line-height:1.5; font-family:"ofelia-text",sans-serif; font-weight:600 }
+      .video-title .byline{ margin-top:0.6rem; margin-bottom:0.45rem; font-size:clamp(0.85rem,1.6vw,1rem); color:rgba(255,255,255,0.95); line-height:1.6 }
+      .video-title .meta{ margin-top:0.6rem; margin-bottom:0.45rem; font-size:0.85rem; color:rgba(255,255,255,0.8); line-height:1.6 }
+      .video-title .synopsis{ margin-top:1rem; font-size:clamp(0.85rem,1.4vw,1rem); color:rgba(255,255,255,0.9); line-height:1.75 }
     /* ensure header sits above the hero (header injection keeps z-index) */
     .hero{z-index:10}
 
@@ -123,15 +124,6 @@
           </div>
       </div>
 
-      <div class="mt-6 text-left max-w-3xl mx-auto text-gray-300">
-        <h2 class="text-xl mb-2">About</h2>
-        <p class="mb-4">Short description or credits for the short film. Add synopsis, festival notes, or production credits here.</p>
-        <h3 class="text-lg mb-1">Credits</h3>
-        <p class="text-sm text-gray-400">Writer / Director: Noam R.C.<br>Producer: [Name]<br>Editor: [Name]</p>
-      </div>
-    </section>
-  </main>
-
   <footer class="py-16 border-t border-gray-800 text-center">
     <div class="container">
       <img src="/public/media/NRCLOGO_v2.png" alt="Logo" class="h-16 mx-auto mb-4">
@@ -160,6 +152,22 @@
           a.classList.remove('font-medium');
         }
       });
+
+      // Added: make injected header fade out when scrolling down
+      if (header) {
+        const TOP_THRESHOLD = 10; // px from top to consider 'at top'
+        function updateInjectedHeader() {
+          const y = window.scrollY || window.pageYOffset;
+          if (y <= TOP_THRESHOLD) {
+            header.classList.remove('header-fade');
+          } else {
+            header.classList.add('header-fade');
+          }
+        }
+        // init and listen
+        updateInjectedHeader();
+        window.addEventListener('scroll', updateInjectedHeader, { passive: true });
+      }
     })();
   </script>
 
