@@ -46,6 +46,30 @@
       position: relative;
       z-index: 20;
     }
+    /* video thumbnail + play button */
+    .video-thumb{ position:relative; width:100%; height:100%; cursor:pointer; display:block }
+    .video-thumb img{ display:block; width:100%; height:100%; object-fit:cover }
+    .play-btn{
+      position:absolute; inset:0; display:flex; align-items:center; justify-content:center; pointer-events:none
+    }
+    .play-btn .circle{ width:84px; height:84px; background:rgba(0,0,0,0.55); border-radius:9999px; display:flex; align-items:center; justify-content:center }
+    .play-btn svg{ width:36px; height:36px; fill:#fff; margin-left:4px }
+    /* title overlay that sits on the trailer and moves with it */
+    .video-title{
+      position:absolute;
+      left:1.25rem;
+      bottom:1.25rem;
+      color:#fff;
+      text-align:left;
+      z-index:30;
+      pointer-events:none;
+      text-shadow:0 6px 18px rgba(0,0,0,0.6);
+      max-width:66%;
+    }
+    .video-title h2{ margin:0 0 0.5rem 0; font-size:clamp(1.25rem,2.6vw,2rem); line-height:1.15; font-weight:600 }
+    .video-title .byline{ margin-top:0.5rem; font-size:clamp(0.85rem,1.6vw,1rem); color:rgba(255,255,255,0.95); line-height:1.35 }
+    .video-title .meta{ margin-top:0.5rem; font-size:0.85rem; color:rgba(255,255,255,0.8); line-height:1.35 }
+    .video-title .synopsis{ margin-top:0.75rem; font-size:clamp(0.85rem,1.4vw,1rem); color:rgba(255,255,255,0.9); line-height:1.45 }
     /* ensure header sits above the hero (header injection keeps z-index) */
     .hero{z-index:10}
 
@@ -78,10 +102,25 @@
       <div class="hero shadow-lg" role="img" aria-label="Little Things poster"></div>
 
       <div class="embed mt-6 shadow-lg">
-        <!-- Embedded YouTube (same video) -->
-        <iframe width="100%" height="100%" src="https://www.youtube.com/embed/9s_Wx-_HwbM?si=NhzKJNl78EEfd4v0"
-                title="Little Things" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen></iframe>
+        <!-- Clickable thumbnail that loads the YouTube iframe on demand -->
+          <div class="video-thumb" role="button" tabindex="0" aria-label="Play Little Things" data-video-id="Ff23kTPSGe8">
+            <img src="/public/media/gnome.webp" alt="Little Things thumbnail">
+            <div class="play-btn" aria-hidden="true">
+              <div class="circle">
+                <svg viewBox="0 0 68 48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <path d="M45 24L27 14v20z" fill="#fff" />
+                </svg>
+              </div>
+            </div>
+          </div>
+          <div class="video-title" aria-label="Trailer details">
+            <h2>Little Things</h2>
+            <p class="byline">written, directed, shot, &amp; edited by Noam Rignault Clement</p>
+
+            <p class="meta">Short Film. 6 min.</p>
+
+            <p class="synopsis">Taking his mother’s advice to enjoy the little things in life, a young boy in the charming French countryside embarks with a stolen garden gnome on an inquisitive quest to find just that.</p>
+          </div>
       </div>
 
       <div class="mt-6 text-left max-w-3xl mx-auto text-gray-300">
@@ -119,6 +158,43 @@
         if (aPath === currentPath) {
           a.classList.add('font-bold','text-white');
           a.classList.remove('font-medium');
+        }
+      });
+    })();
+  </script>
+
+  <script>
+    // Replace the thumbnail with an autoplaying YouTube iframe when activated
+    (function(){
+      function createIframe(videoId){
+        const iframe = document.createElement('iframe');
+        iframe.width = '100%';
+        iframe.height = '100%';
+        iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`;
+        iframe.title = 'Little Things';
+        iframe.frameBorder = '0';
+        iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+        iframe.allowFullscreen = true;
+        return iframe;
+      }
+
+      const thumb = document.querySelector('.video-thumb');
+      if (!thumb) return;
+      const container = thumb.closest('.embed');
+      const videoId = thumb.getAttribute('data-video-id');
+
+      function loadVideo(){
+        if (!container) return;
+        const iframe = createIframe(videoId);
+        container.innerHTML = '';
+        container.appendChild(iframe);
+      }
+
+      thumb.addEventListener('click', loadVideo);
+      thumb.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          loadVideo();
         }
       });
     })();
