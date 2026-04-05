@@ -36,7 +36,9 @@
       aspect-ratio:16/9;
       border-radius:.5rem;
       overflow:hidden;
-      margin-top:1rem;
+      margin-top:0; /* removed extra top spacing; mt-6 was adding space */
+      margin-bottom:0; /* ensure no bottom gap */
+
       /* prepare for transform-based movement */
       will-change: transform;
       transform: translateY(0);
@@ -92,6 +94,54 @@
 
     /* ensure any hero children (none currently) sit above the overlay */
     .hero > * { position: relative; z-index: 2; }
+
+    /* new: styling for selection image shown under the trailer */
+    .selection-image{
+      display:block;
+      width:100%;
+      max-width:1100px;
+      margin: 200px auto 0; /* more space between trailer and selections */
+      border-radius:.5rem;
+      object-fit:cover;
+      box-shadow:0 10px 30px rgba(0,0,0,0.6);
+      position:relative;
+      z-index:10;
+      will-change: transform, opacity, filter; /* allow hardware-accelerated transforms + fades */
+      opacity: 0;
+      filter: blur(8px);
+      transition: opacity 5s cubic-bezier(.2,.9,.2,1), filter 3s cubic-bezier(.2,.9,.2,1); /* slower fade */
+    }
+    /* visible state: fade in and remove blur */
+    .selection-image.in-view { opacity:1; filter: none; }
+
+    /* new: single collage image under selections */
+    .collage-image{
+      display:block;
+      /* full-bleed across the viewport */
+      width:100vw;
+      max-width:none;
+      margin-top:8px; /* bring closer to selection image */
+      margin-left: calc(50% - 50vw);
+      margin-right: calc(50% - 50vw);
+      border-radius:0; /* flush to edges */
+      object-fit:cover;
+      box-shadow:none;
+
+      /* allow transform-based parallax */
+      will-change: transform;
+      transform: translateY(0);
+    }
+    @media (max-width:640px){
+      .selection-image{ margin-top:12px; }
+      .collage-image{
+        /* keep small breathing space on small screens if desired */
+        margin-left: 0;
+        margin-right: 0;
+        width:100%;
+        max-width:100%;
+        margin-top:8px;
+      }
+    }
   </style>
 </head>
 <body class="text-gray-100">
@@ -102,7 +152,7 @@
       <!-- full-screen poster hero -->
       <div class="hero shadow-lg" role="img" aria-label="Little Things poster"></div>
 
-      <div class="embed mt-6 shadow-lg">
+      <div class="embed shadow-lg">
         <!-- Clickable thumbnail that loads the YouTube iframe on demand -->
           <div class="video-thumb" role="button" tabindex="0" aria-label="Play Little Things" data-video-id="Ff23kTPSGe8">
             <img src="/public/media/gnome.webp" alt="Little Things thumbnail">
@@ -123,6 +173,12 @@
             <p class="synopsis">Taking his mother’s advice to enjoy the little things in life, a young boy in the charming French countryside embarks with a stolen garden gnome on an inquisitive quest to find just that.</p>
           </div>
       </div>
+
+      <!-- Added: selection image under the trailer -->
+      <img src="/public/media/selection.webp" alt="Selection stills" class="selection-image">
+
+      <!-- Collage image placed under selections -->
+      <img src="/public/media/collage.webp" alt="Collage of stills" class="collage-image">
 
   <footer class="py-16 border-t border-gray-800 text-center">
     <div class="container">
@@ -212,17 +268,31 @@
     // Move the embed "black box" upward while scrolling (efficient rAF loop)
     (function(){
       const box = document.querySelector('.embed');
+      const selection = document.querySelector('.selection-image');
+      const collage = document.querySelector('.collage-image'); // new target
       if (!box) return;
       let latestScroll = 0;
       let ticking = false;
-      const maxShift = Math.min(window.innerHeight * 0.5, 300); // clamp max upward movement
+
+     // clamp max upward movement for trailer/selection and a separate clamp for collage
+     function maxShiftForTrailer() { return Math.min(window.innerHeight * 0.5, 300); }
+     function maxShiftForCollage() { return Math.min(window.innerHeight * 0.35, 220); }
 
       function update() {
         // Move upward as page scroll increases (negative translateY)
-        // Use a factor to control speed; adjust factor for stronger/weaker effect
-        const factor = 0.45;
-        const shift = Math.min(latestScroll * factor, maxShift);
+        // Use factors to control speed; adjust factors for stronger/weaker effect
+        const trailerFactor = 0.45;
+        const collageFactor = 0.22; // slower movement for the collage (parallax)
+
+        const shift = Math.min(latestScroll * trailerFactor, maxShiftForTrailer());
         box.style.transform = `translateY(${-shift}px)`;
+        if (selection) selection.style.transform = `translateY(${-shift}px)`;
+
+        // apply a different (usually smaller) shift to the collage for a parallax effect
+        if (collage) {
+          const collShift = Math.min(latestScroll * collageFactor, maxShiftForCollage());
+          collage.style.transform = `translateY(${-collShift}px)`;
+        }
         ticking = false;
       }
 
@@ -236,7 +306,28 @@
 
       window.addEventListener('scroll', onScroll, { passive: true });
       // keep maxShift reasonable on resize
-      window.addEventListener('resize', () => { /* no-op; maxShift recalculated on next load if desired */ }, { passive: true });
+      window.addEventListener('resize', () => { /* recalculated inside update via functions */ }, { passive: true });
+    })();
+  </script>
+
+  <script>
+    // Fade-in with blur removal when the selection image scrolls into view
+    (function(){
+      const sel = document.querySelector('.selection-image');
+      if (!sel || !('IntersectionObserver' in window)) {
+        // Immediately show if no observer support
+        if (sel) sel.classList.add('in-view');
+        return;
+      }
+      const io = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            sel.classList.add('in-view');
+            obs.unobserve(sel);
+          }
+        });
+      }, { root: null, rootMargin: '0px 0px -10% 0px', threshold: 0.12 });
+      io.observe(sel);
     })();
   </script>
 </body>
