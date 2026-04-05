@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Little Things — Noam R.C.</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://use.typekit.net/ehp0bwx.css">
+  <style>
+    /* remove default body margin and keep background */
+    body{margin:0;background:#000;color:#f3f4f6;font-family:"ofelia-text",sans-serif;-webkit-font-smoothing:antialiased}
+    h1,h2,h3{font-family:"bodega-serif",serif;font-weight:300}
+    /* remove top padding so hero sits flush to the top */
+    .container{max-width:1100px;margin:0 auto;padding:0 2rem}
+    a.back{color:#cbd5e1;text-decoration:underline}
+    /* full-screen hero using the same asset */
+    .hero{
+      height:100vh;
+      width:100vw;
+      margin-left:50%;
+      transform:translateX(-50%);
+      background-image:url('/public/media/littlethings.webp');
+      background-size:cover;
+      background-position:center;
+      background-repeat:no-repeat;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      position:relative;
+    }
+    /* removed overlay box styling */
+    .hero-inner{ background:transparent; padding:0; border-radius:0; }
+    .meta{color:#9ca3af;font-size:.9rem;margin-top:.5rem;letter-spacing:.12em}
+    .embed{
+      width:100%;
+      aspect-ratio:16/9;
+      border-radius:.5rem;
+      overflow:hidden;
+      margin-top:1rem;
+      /* prepare for transform-based movement */
+      will-change: transform;
+      transform: translateY(0);
+      transition: transform 160ms linear;
+
+      /* position and z-index so the embed sits above the hero background/overlay */
+      position: relative;
+      z-index: 20;
+    }
+    /* ensure header sits above the hero (header injection keeps z-index) */
+    .hero{z-index:10}
+
+    /* overlay stars image above the hero background */
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: url('/public/media/stars.webp');
+      /* make the stars image smaller (adjust percent as needed) */
+      background-size: 60% auto;
+      background-position: center;
+      background-repeat: no-repeat;
+      opacity: 0.85; /* adjust to taste */
+      pointer-events: none;
+      mix-blend-mode: screen; /* optional; try 'normal' if undesired */
+      z-index: 1;
+    }
+
+    /* ensure any hero children (none currently) sit above the overlay */
+    .hero > * { position: relative; z-index: 2; }
+  </style>
+</head>
+<body class="text-gray-100">
+  <div id="header-container"></div>
+
+  <main>
+    <section class="container px-0 text-center">
+      <!-- full-screen poster hero -->
+      <div class="hero shadow-lg" role="img" aria-label="Little Things poster"></div>
+
+      <div class="embed mt-6 shadow-lg">
+        <!-- Embedded YouTube (same video) -->
+        <iframe width="100%" height="100%" src="https://www.youtube.com/embed/9s_Wx-_HwbM?si=NhzKJNl78EEfd4v0"
+                title="Little Things" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
+      </div>
+
+      <div class="mt-6 text-left max-w-3xl mx-auto text-gray-300">
+        <h2 class="text-xl mb-2">About</h2>
+        <p class="mb-4">Short description or credits for the short film. Add synopsis, festival notes, or production credits here.</p>
+        <h3 class="text-lg mb-1">Credits</h3>
+        <p class="text-sm text-gray-400">Writer / Director: Noam R.C.<br>Producer: [Name]<br>Editor: [Name]</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="py-16 border-t border-gray-800 text-center">
+    <div class="container">
+      <img src="/public/media/NRCLOGO_v2.png" alt="Logo" class="h-16 mx-auto mb-4">
+      <p class="text-gray-100 text-sm tracking-wider">2025 - NOAM R.C.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Inject header.html (same approach as index)
+    (async () => {
+      const res = await fetch('header.html');
+      const html = await res.text();
+      document.getElementById('header-container').innerHTML = html;
+
+      const header = document.querySelector('#header-container header');
+      const mobileBtn = header?.querySelector('#mobile-menu-button');
+      const mobileMenu = header?.querySelector('#mobile-menu');
+      mobileBtn?.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+
+      // Mark active nav link
+      const currentPath = location.pathname.replace(/\/$/, '') || '/';
+      header?.querySelectorAll('a[href]').forEach(a => {
+        const aPath = new URL(a.href, location.origin).pathname.replace(/\/$/, '') || '/';
+        if (aPath === currentPath) {
+          a.classList.add('font-bold','text-white');
+          a.classList.remove('font-medium');
+        }
+      });
+    })();
+  </script>
+
+  <script>
+    // Move the embed "black box" upward while scrolling (efficient rAF loop)
+    (function(){
+      const box = document.querySelector('.embed');
+      if (!box) return;
+      let latestScroll = 0;
+      let ticking = false;
+      const maxShift = Math.min(window.innerHeight * 0.5, 300); // clamp max upward movement
+
+      function update() {
+        // Move upward as page scroll increases (negative translateY)
+        // Use a factor to control speed; adjust factor for stronger/weaker effect
+        const factor = 0.45;
+        const shift = Math.min(latestScroll * factor, maxShift);
+        box.style.transform = `translateY(${-shift}px)`;
+        ticking = false;
+      }
+
+      function onScroll(){
+        latestScroll = window.scrollY;
+        if (!ticking) {
+          window.requestAnimationFrame(update);
+          ticking = true;
+        }
+      }
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+      // keep maxShift reasonable on resize
+      window.addEventListener('resize', () => { /* no-op; maxShift recalculated on next load if desired */ }, { passive: true });
+    })();
+  </script>
+</body>
+</html>
