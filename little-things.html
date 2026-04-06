@@ -68,8 +68,13 @@
       text-shadow:0 6px 18px rgba(0,0,0,0.6);
       max-width:66%;
     }
-    .video-title h2{ margin:0 0 0.5rem 0; font-size:clamp(1.25rem,2.6vw,2rem); line-height:1.15; font-weight:600 }
-      .video-title h2{ margin:0 0 0.75rem 0; font-size:clamp(1.25rem,2.6vw,2rem); line-height:1.5; font-family:"ofelia-text",sans-serif; font-weight:600 }
+    .video-title h2{
+      margin:0 0 0.75rem 0;
+      font-size:clamp(1.25rem,2.6vw,2rem);
+      line-height:1.5;
+      font-family:"ofelia-text",sans-serif;
+      font-weight:600;
+    }
       .video-title .byline{ margin-top:0.6rem; margin-bottom:0.45rem; font-size:clamp(0.85rem,1.6vw,1rem); color:rgba(255,255,255,0.95); line-height:1.6 }
       .video-title .meta{ margin-top:0.6rem; margin-bottom:0.45rem; font-size:0.85rem; color:rgba(255,255,255,0.8); line-height:1.6 }
       .video-title .synopsis{ margin-top:1rem; font-size:clamp(0.85rem,1.4vw,1rem); color:rgba(255,255,255,0.9); line-height:1.75 }
@@ -131,16 +136,119 @@
       will-change: transform;
       transform: translateY(0);
     }
-    @media (max-width:640px){
-      .selection-image{ margin-top:12px; }
-      .collage-image{
-        /* keep small breathing space on small screens if desired */
-        margin-left: 0;
-        margin-right: 0;
-        width:100%;
-        max-width:100%;
-        margin-top:8px;
-      }
+
+    /* city image placed under the collage — full-bleed and ready for transforms */
+    .city-image{
+      display:block;
+      width:100vw;
+      max-width:none;
+      /* match collage spacing so city sits directly beneath it */
+      margin-top:8px;
+      margin-left: calc(50% - 50vw);
+      margin-right: calc(50% - 50vw);
+      object-fit:cover;
+      box-shadow:none;
+      border-radius: 0;   /* flush edges with collage */
+      will-change: transform;
+      transform: translateY(0);
+      z-index: 0;
+    }
+    /* bio section: photo left, text right; stacks on small screens */
+    .bio-section {
+      display: flex;
+      gap: 28px;
+      align-items: flex-start;
+      justify-content: flex-end;
+      max-width: 1100px;
+      margin: 8px auto 0;
+      margin-bottom: 48px;
+      padding: 0 2rem;
+      /* static layout: final position applied via JS */
+      transform: none;
+      transition: none;
+    }
+    .bio-photo {
+      flex: 0 0 440px;   /* larger portrait on desktop */
+      width: 440px;
+      height: auto;        /* allow natural image height (not square) */
+      overflow: visible;   /* allow image to determine its height */
+      border-radius: .5rem;
+      background: #0b0b0b;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.45);
+
+      /* ready for JS-driven transforms */
+      will-change: transform;
+      transform: translateY(0);
+      position: relative;
+      z-index: 30;
+    }
+    .bio-photo img {
+      width: 100%;    /* scale to container width */
+      height: auto;   /* preserve original aspect ratio */
+      object-fit: contain;
+      display: block;
+    }
+    /* allow the text block to be moved in sync with the portrait */
+    .bio-text {
+      will-change: transform;
+      transform: translateY(0);
+      position: relative;
+      z-index: 31;
+    }
+    /* format bio text to match the trailer overlay (.video-title)
+       reduced width so it sits narrower beside the portrait */
+     .bio-text {
+       flex: 0 0 420px;   /* fixed/base width beside the portrait */
+       max-width: 420px;  /* prevent it from growing wider */
+       min-width: 260px;  /* allow reasonable minimum before wrapping */
+       text-align: left;
+       text-shadow: 0 6px 18px rgba(0,0,0,0.6);
+       color: #fff;
+     }
+     /* heading styled like the trailer title */
+    .bio-text h3 {
+      margin: 0 0 0.6rem 0;
+      font-family: "ofelia-text", sans-serif;
+      font-weight: 600;
+      font-size: clamp(1.0rem, 1.8vw, 1.4rem); /* smaller heading */
+      line-height: 1.35;
+      color: #ffffff;
+    }
+     /* role/byline style follows the trailer byline */
+     .bio-text .roles {
+      display: block;
+      margin-top: 0.4rem;
+      margin-bottom: 0.35rem;
+      font-size: clamp(0.75rem, 1.2vw, 0.9rem); /* smaller byline */
+      color: rgba(255,255,255,0.95);
+      font-weight: 600;
+      letter-spacing: 0;
+    }
+     /* paragraphs styled like trailer meta/synopsis */
+    .bio-text p {
+      margin-top: 0.9rem;        /* a bit more space above paragraphs */
+      margin-bottom: 0.7rem;     /* space between paragraphs */
+      font-size: clamp(0.78rem, 1.05vw, 0.9rem); /* unchanged */
+      color: rgba(255,255,255,0.9);
+      line-height: 1.9;          /* increased line spacing for readability */
+    }
+
+    /* shrink & fade the "director | writer" line inside the bio only */
+    .bio-text .meta {
+      display:block;
+      margin-top:0.35rem;
+      margin-bottom:0.6rem;
+      font-size: clamp(0.65rem, 0.9vw, 0.78rem); /* smaller than other body text */
+      color: rgba(255,255,255,0.58);            /* reduced opacity */
+      font-weight: 500;
+      letter-spacing: 0.02em;
+    }
+    @media (max-width: 768px) {
+      .bio-section { flex-direction: column; gap: 16px; margin: 18px auto 0; align-items: center; transform: none; } /* center on mobile; undo desktop lift */
+      .bio-photo { width: 100%; height: auto; }
+      .bio-photo img { height: 100%; }
+      .bio-text h3 { font-size: clamp(1.0rem, 3.2vw, 1.25rem); }
+      .bio-text p { font-size: clamp(0.85rem, 2.6vw, 1rem); }
     }
   </style>
 </head>
@@ -175,10 +283,30 @@
       </div>
 
       <!-- Added: selection image under the trailer -->
-      <img src="/public/media/Selection.webp" alt="Selection stills" class="selection-image">
+      <img src="/public/media/selection.webp" alt="Selection stills" class="selection-image">
 
       <!-- Collage image placed under selections -->
       <img src="/public/media/Collage.webp" alt="Collage of stills" class="collage-image">
+
+      <!-- City image added under the collage -->
+      <img src="/public/media/city.png" alt="City still" class="city-image">
+
+      <!-- Bio: Noam section (image left, text right) -->
+      <section class="bio-section" aria-labelledby="bio-title">
+        <div class="bio-photo" aria-hidden="true">
+          <img src="/public/media/Noam.webp" alt="Noam Rignault Clement portrait">
+        </div>
+        <div class="bio-text">
+          <h3 id="bio-title">THE DIRECTOR<br><span style="font-weight:600">
+          <p class="roles">Noam Rignault Clement<br>
+            <p class="meta">director | writer | cinematographer | editor | actor</p>
+          <p>Noam Rignault Clement is an 18-year-old French-American filmmaker and actor attending UC Berkeley. His narrative work, which explores the complexities of childhood, growing up, neurodivergence, and multiculturalism, has received multiple awards and nominations.</p>
+          <p>His latest short film, “Little Things” (2025), which he wrote, directed, filmed, and edited, is being screened at the 2026 San Francisco International Film Festival and was presented at the 2026 National Film Festival for Talented Youth festival (NFFTY).</p>
+          <p>Noam is currently in pre-production for his next short film “it ends with snails,” which touches on social justice and untangling interconnected lives through a childhood lens. He is actively seeking partners to bring his vision to life.</p>
+        </div>
+      </section>
+    </section>
+  </main>
 
   <footer class="py-16 border-t border-gray-800 text-center">
     <div class="container">
@@ -209,20 +337,15 @@
         }
       });
 
-      // Added: make injected header fade out when scrolling down
+      // toggle injected header on scroll (small guard)
       if (header) {
-        const TOP_THRESHOLD = 10; // px from top to consider 'at top'
-        function updateInjectedHeader() {
+        const TOP_THRESHOLD = 10;
+        const onHeaderScroll = () => {
           const y = window.scrollY || window.pageYOffset;
-          if (y <= TOP_THRESHOLD) {
-            header.classList.remove('header-fade');
-          } else {
-            header.classList.add('header-fade');
-          }
-        }
-        // init and listen
-        updateInjectedHeader();
-        window.addEventListener('scroll', updateInjectedHeader, { passive: true });
+          header.classList.toggle('header-fade', y > TOP_THRESHOLD);
+        };
+        onHeaderScroll();
+        window.addEventListener('scroll', onHeaderScroll, { passive: true });
       }
     })();
   </script>
@@ -264,52 +387,7 @@
     })();
   </script>
 
-  <script>
-    // Move the embed "black box" upward while scrolling (efficient rAF loop)
-    (function(){
-      const box = document.querySelector('.embed');
-      const selection = document.querySelector('.selection-image');
-      const collage = document.querySelector('.collage-image'); // new target
-      if (!box) return;
-      let latestScroll = 0;
-      let ticking = false;
-
-     // clamp max upward movement for trailer/selection and a separate clamp for collage
-     function maxShiftForTrailer() { return Math.min(window.innerHeight * 0.5, 300); }
-     function maxShiftForCollage() { return Math.min(window.innerHeight * 0.35, 220); }
-
-      function update() {
-        // Move upward as page scroll increases (negative translateY)
-        // Use factors to control speed; adjust factors for stronger/weaker effect
-        const trailerFactor = 0.45;
-        const collageFactor = 0.22; // slower movement for the collage (parallax)
-
-        const shift = Math.min(latestScroll * trailerFactor, maxShiftForTrailer());
-        box.style.transform = `translateY(${-shift}px)`;
-        if (selection) selection.style.transform = `translateY(${-shift}px)`;
-
-        // apply a different (usually smaller) shift to the collage for a parallax effect
-        if (collage) {
-          const collShift = Math.min(latestScroll * collageFactor, maxShiftForCollage());
-          collage.style.transform = `translateY(${-collShift}px)`;
-        }
-        ticking = false;
-      }
-
-      function onScroll(){
-        latestScroll = window.scrollY;
-        if (!ticking) {
-          window.requestAnimationFrame(update);
-          ticking = true;
-        }
-      }
-
-      window.addEventListener('scroll', onScroll, { passive: true });
-      // keep maxShift reasonable on resize
-      window.addEventListener('resize', () => { /* recalculated inside update via functions */ }, { passive: true });
-    })();
-  </script>
-
+  
   <script>
     // Fade-in with blur removal when the selection image scrolls into view
     (function(){
@@ -328,6 +406,41 @@
         });
       }, { root: null, rootMargin: '0px 0px -10% 0px', threshold: 0.12 });
       io.observe(sel);
+    })();
+  </script>
+
+  <script>
+    // Position bio (photo + text) so its bottom aligns with top of city.png (one-time, on load/resize).
+    (function(){
+      const city = document.querySelector('.city-image');
+      const bioPhoto = document.querySelector('.bio-photo');
+      const bioText = document.querySelector('.bio-text');
+      if (!bioPhoto || !city) return;
+
+      function absTop(el){
+        let top = 0;
+        while (el) { top += el.offsetTop; el = el.offsetParent; }
+        return top;
+      }
+
+      function applyFinalPosition(){
+        // compute document-space bottoms/tops using offsets (ignores transforms)
+        const bioTop = absTop(bioPhoto);
+        const bioBottom = bioTop + bioPhoto.offsetHeight;
+        const cityTop = absTop(city);
+
+        const desiredGap = 650; // increase to lower the bio (pixels). Adjust as needed.
+        const finalShift = Math.max(0, bioBottom - (cityTop + desiredGap));
+
+        // Apply final static transform (negative to move up)
+        bioPhoto.style.transform = `translateY(${-finalShift}px)`;
+        if (bioText) bioText.style.transform = `translateY(${-finalShift}px)`;
+      }
+
+      window.addEventListener('load', applyFinalPosition, { passive: true });
+      window.addEventListener('resize', applyFinalPosition, { passive: true });
+      // Immediate run in case the page is already loaded
+      applyFinalPosition();
     })();
   </script>
 </body>
