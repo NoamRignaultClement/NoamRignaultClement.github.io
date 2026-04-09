@@ -142,8 +142,8 @@
       display:block;
       width:100vw;
       max-width:none;
-      /* match collage spacing so city sits directly beneath it */
-      margin-top:8px;
+      /* pull the city image up onto the section plane */
+      margin-top: -160px; /* bring city up; adjust value (px) to taste */
       margin-left: calc(50% - 50vw);
       margin-right: calc(50% - 50vw);
       object-fit:cover;
@@ -160,7 +160,7 @@
       align-items: flex-start;
       justify-content: flex-end;
       max-width: 1100px;
-      margin: 8px auto 0;
+      margin: -160px auto 0; /* raise Noam.webp + bio text to sit on the same plane as city */
       margin-bottom: 48px;
       padding: 0 2rem;
       /* static layout: final position applied via JS */
@@ -441,6 +441,48 @@
       window.addEventListener('resize', applyFinalPosition, { passive: true });
       // Immediate run in case the page is already loaded
       applyFinalPosition();
+    })();
+  </script>
+
+  <script>
+    // Linear parallax: move the embed (gnome.webp) faster than page scroll,
+    // and move selection + collage in sync (collage slightly subtler).
+    (function(){
+      const embed = document.querySelector('.embed');
+      const selection = document.querySelector('.selection-image');
+      const collage = document.querySelector('.collage-image');
+      if (!embed) return;
+
+      let ticking = false;
+
+      // Movement multiplier (adjust to taste)
+      const FACTOR = 0.35;
+      // collage moves a bit more subtly to feel like background
+      const COLLAGE_FACTOR = 0.9;
+
+      function update() {
+        const s = window.scrollY || window.pageYOffset;
+        const maxShift = Math.min(window.innerHeight * 0.5, 500);
+        const shift = s > 0 ? Math.min(s * FACTOR, maxShift) : 0;
+
+        // apply same linear shift to embed + selection; collage slightly reduced
+        embed.style.transform = `translateY(${-shift}px)`;
+        if (selection) selection.style.transform = `translateY(${-shift}px)`;
+        if (collage) collage.style.transform = `translateY(${-Math.min(shift * COLLAGE_FACTOR, maxShift)}px)`;
+
+        ticking = false;
+      }
+
+      function onScroll() {
+        if (!ticking) {
+          window.requestAnimationFrame(update);
+          ticking = true;
+        }
+      }
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('load', update, { passive: true });
+      window.addEventListener('resize', update, { passive: true });
     })();
   </script>
 </body>
