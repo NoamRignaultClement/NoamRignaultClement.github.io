@@ -137,28 +137,12 @@
       transform: translateY(0);
     }
 
-    /* city image placed under the collage — full-bleed and ready for transforms */
-    .city-image{
-      display:block;
-      width:100vw;
-      max-width:none;
-      /* pull the city image up onto the section plane */
-      margin-top: -160px; /* bring city up; adjust value (px) to taste */
-      margin-left: calc(50% - 50vw);
-      margin-right: calc(50% - 50vw);
-      object-fit:cover;
-      box-shadow:none;
-      border-radius: 0;   /* flush edges with collage */
-      will-change: transform;
-      transform: translateY(0);
-      z-index: 0;
-    }
     /* bio section: photo left, text right; stacks on small screens */
     .bio-section {
       display: flex;
       gap: 28px;
       align-items: flex-start;
-      justify-content: flex-end;
+      justify-content: center;
       max-width: 1100px;
       margin: -160px auto 0; /* raise Noam.webp + bio text to sit on the same plane as city */
       margin-bottom: 48px;
@@ -176,6 +160,11 @@
       background: #0b0b0b;
       box-shadow: 0 10px 30px rgba(0,0,0,0.45);
 
+      /* stack portrait + BTS image vertically */
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+
       /* ready for JS-driven transforms */
       will-change: transform;
       transform: translateY(0);
@@ -187,6 +176,16 @@
       height: auto;   /* preserve original aspect ratio */
       object-fit: contain;
       display: block;
+    }
+    /* BTS image shown directly under the main portrait, same width */
+    .bts-photo {
+      width: 100%;
+      height: auto;
+      display:block;
+      border-radius: .5rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+      object-fit: cover;
+      margin-top: 50px; /* push BTS down to align with top of awards text */
     }
     /* allow the text block to be moved in sync with the portrait */
     .bio-text {
@@ -233,6 +232,19 @@
       line-height: 1.9;          /* increased line spacing for readability */
     }
 
+    /* ensure the long awards/credits block under the portrait matches the bio paragraph styling */
+    .bio-extra-left p {
+      margin-top: 0.9rem;
+      margin-bottom: 0.7rem;
+      font-size: clamp(0.78rem, 1.05vw, 0.9rem);
+      color: rgba(255,255,255,0.9);
+      line-height: 1.9;
+      text-shadow: 0 6px 18px rgba(0,0,0,0.6);
+    }
+    /* align the awards text to the right */
+    .bio-extra-left {
+      text-align: right;
+    }
     /* shrink & fade the "director | writer" line inside the bio only */
     .bio-text .meta {
       display:block;
@@ -244,11 +256,14 @@
       letter-spacing: 0.02em;
     }
     @media (max-width: 768px) {
-      .bio-section { flex-direction: column; gap: 16px; margin: 18px auto 0; align-items: center; transform: none; } /* center on mobile; undo desktop lift */
+      .bio-section { flex-direction: column-reverse; gap: 16px; margin: 18px auto 0; align-items: center; transform: none; } /* center on mobile; reverse order so director text appears above awards */
       .bio-photo { width: 100%; height: auto; }
       .bio-photo img { height: 100%; }
       .bio-text h3 { font-size: clamp(1.0rem, 3.2vw, 1.25rem); }
       .bio-text p { font-size: clamp(0.85rem, 2.6vw, 1rem); }
+      .bio-extra-left { text-align: left; } /* reset text alignment to left on mobile */
+      .bts-photo { margin-top: 0; } /* remove top margin on mobile */
+      .bts-photo { display: none; } /* hide BTS image on mobile */
     }
   </style>
 </head>
@@ -288,21 +303,29 @@
       <!-- Collage image placed under selections -->
       <img src="/public/media/Collage.webp" alt="Collage of stills" class="collage-image">
 
-      <!-- City image added under the collage -->
-      <img src="/public/media/City.png" alt="City still" class="city-image">
-
-      <!-- Bio: Noam section (image left, text right) -->
+       <!-- Bio: Noam section (image left, text right) -->
       <section class="bio-section" aria-labelledby="bio-title">
         <div class="bio-photo" aria-hidden="true">
           <img src="/public/media/Noam.webp" alt="Noam Rignault Clement portrait">
+
+          <!-- moved: long awards/biography block now sits under the portrait -->
+          <div class="bio-extra-left" aria-hidden="true">
+            <p>Noam's short, “The Wooden Heart” (2024), which he also wrote, directed, filmed, and edited, won Best Short Film at the 2025 NATAS National Student Production Awards (NATAS is also the organization behind the Emmy® Awards), the Best Drama Award from the 2025 Student Television Network: Film Excellence competition, and an Exceptional Award from the 2025 Bay Area Creative Youth competition.</p>
+            <p>“The Buttercup Mafia” (2025), which Noam wrote, directed, and edited, earned him a Best Director nomination at the 2025 All American High School Film Festival and was screened at the 2025 Mill Valley Film Festival. Noam was also an Emerging Talent nominee at the 2024 All-American High School Film Festival for his first film, “Fragments” (2024), which he wrote, directed, and edited.</p>
+            <p>Noam is an active member of the UC Berkeley Business and Film Association (BAFA), and the Special Projects Group (SPG) as part of the UC Berkeley Cinematic Arts and Production Studios. He also works on commercial projects with San Francisco-based companies. He is an alum of the UCLA Cinematography Summer Institute and the Marin School of the Arts program.</p>
+          </div>
         </div>
+
         <div class="bio-text">
-          <h3 id="bio-title">THE DIRECTOR<br><span style="font-weight:600">
-          <p class="roles">Noam Rignault Clement<br>
-            <p class="meta">director | writer | cinematographer | editor | actor</p>
+          <h3 id="bio-title">THE DIRECTOR<br><span style="font-weight:600"></span></h3>
+          <p class="roles">Noam Rignault Clement</p>
+          <p class="meta">director | writer | cinematographer | editor | actor</p>
           <p>Noam Rignault Clement is an 18-year-old French-American filmmaker and actor attending UC Berkeley. His narrative work, which explores the complexities of childhood, growing up, neurodivergence, and multiculturalism, has received multiple awards and nominations.</p>
-          <p>His latest short film, “Little Things” (2025), which he wrote, directed, filmed, and edited, is being screened at the 2026 San Francisco International Film Festival and was presented at the 2026 National Film Festival for Talented Youth festival (NFFTY).</p>
+          <p>His latest short film, “Little Things” (2025), which he wrote, directed, filmed, and edited, is being screened at the 2026 San Francisco International Film Festival and was presented at the 2026 National Film Festival for Talented Youth (NFFTY).</p>
           <p>Noam is currently in pre-production for his next short film “it ends with snails,” which touches on social justice and untangling interconnected lives through a childhood lens. He is actively seeking partners to bring his vision to life.</p>
+
+          <!-- moved: BTS image now sits in the right column beside the text -->
+          <img src="/public/media/BTS.JPG" alt="Behind the scenes" class="bts-photo">
         </div>
       </section>
     </section>
@@ -406,41 +429,6 @@
         });
       }, { root: null, rootMargin: '0px 0px -10% 0px', threshold: 0.12 });
       io.observe(sel);
-    })();
-  </script>
-
-  <script>
-    // Position bio (photo + text) so its bottom aligns with top of city.png (one-time, on load/resize).
-    (function(){
-      const city = document.querySelector('.city-image');
-      const bioPhoto = document.querySelector('.bio-photo');
-      const bioText = document.querySelector('.bio-text');
-      if (!bioPhoto || !city) return;
-
-      function absTop(el){
-        let top = 0;
-        while (el) { top += el.offsetTop; el = el.offsetParent; }
-        return top;
-      }
-
-      function applyFinalPosition(){
-        // compute document-space bottoms/tops using offsets (ignores transforms)
-        const bioTop = absTop(bioPhoto);
-        const bioBottom = bioTop + bioPhoto.offsetHeight;
-        const cityTop = absTop(city);
-
-        const desiredGap = 650; // increase to lower the bio (pixels). Adjust as needed.
-        const finalShift = Math.max(0, bioBottom - (cityTop + desiredGap));
-
-        // Apply final static transform (negative to move up)
-        bioPhoto.style.transform = `translateY(${-finalShift}px)`;
-        if (bioText) bioText.style.transform = `translateY(${-finalShift}px)`;
-      }
-
-      window.addEventListener('load', applyFinalPosition, { passive: true });
-      window.addEventListener('resize', applyFinalPosition, { passive: true });
-      // Immediate run in case the page is already loaded
-      applyFinalPosition();
     })();
   </script>
 
