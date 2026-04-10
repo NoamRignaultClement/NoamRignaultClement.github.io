@@ -136,6 +136,350 @@
       will-change: transform;
       transform: translateY(0);
     }
+    /* gnome image styling (same as collage) */
+    .gnome-image {
+      display: block;
+      width: 100vw;
+      max-width: none;
+      margin-top: -200px; /* remove gap between collage and gnome */
+      margin-left: calc(50% - 50vw);
+      margin-right: calc(50% - 50vw);
+      border-radius: 0;
+      object-fit: cover;
+      box-shadow: none;
+      will-change: transform;
+      transform: translateY(0);
+    }
+    /* banner section with overlay title */
+    .banner-section {
+      position: relative;
+      width: 100vw;
+      max-width: none;
+      margin-top: -200px;
+      margin-left: calc(50% - 50vw);
+      margin-right: calc(50% - 50vw);
+    }
+    .banner-section img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+    }
+    .banner-title {
+      position: absolute;
+      left: 1.25rem;
+      top: 40%;
+      transform: translateY(-50%);
+      color: #fff;
+      text-align: left;
+      z-index: 30;
+      pointer-events: none;
+      text-shadow: 0 6px 18px rgba(0,0,0,0.6);
+      max-width: 35%;
+    }
+    .banner-title h2 {
+      margin: 0 0 0.75rem 0;
+      font-size: clamp(1.25rem, 2.6vw, 2rem);
+      line-height: 1.5;
+      font-family: "ofelia-text", sans-serif;
+      font-weight: 600;
+    }
+    .banner-title .byline { margin-top: 0.6rem; margin-bottom: 0.45rem; font-size: clamp(0.85rem, 1.6vw, 1rem); color: rgba(255,255,255,0.95); line-height: 1.6; }
+    .banner-title .meta { margin-top: 0.6rem; margin-bottom: 0.45rem; font-size: 0.85rem; color: rgba(255,255,255,0.8); line-height: 1.6; }
+    .banner-title .synopsis { margin-top: 1rem; font-size: clamp(0.85rem, 1.4vw, 1rem); color: rgba(255,255,255,0.9); line-height: 1.75; }
+
+    /* ensure header sits above the hero (header injection keeps z-index) */
+    .hero{z-index:10}
+
+    /* overlay stars image above the hero background */
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: url('/public/media/stars.webp');
+      /* make the stars image smaller (adjust percent as needed) */
+      background-size: 60% auto;
+      background-position: center;
+      background-repeat: no-repeat;
+      opacity: 0.85; /* adjust to taste */
+      pointer-events: none;
+      mix-blend-mode: screen; /* optional; try 'normal' if undesired */
+      z-index: 1;
+    }
+
+    /* ensure any hero children (none currently) sit above the overlay */
+    .hero > * { position: relative; z-index: 2; }
+
+    /* new: styling for selection image shown under the trailer */
+    .selection-image{
+      display:block;
+      width:100%;
+      max-width:1100px;
+      margin: 200px auto 0; /* more space between trailer and selections */
+      border-radius:.5rem;
+      object-fit:cover;
+      box-shadow:0 10px 30px rgba(0,0,0,0.6);
+      position:relative;
+      z-index:10;
+      will-change: transform, opacity, filter; /* allow hardware-accelerated transforms + fades */
+      opacity: 0;
+      filter: blur(8px);
+      transition: opacity 5s cubic-bezier(.2,.9,.2,1), filter 3s cubic-bezier(.2,.9,.2,1); /* slower fade */
+    }
+    /* visible state: fade in and remove blur */
+    .selection-image.in-view { opacity:1; filter: none; }
+
+    /* new: single collage image under selections */
+    .collage-image{
+      display:block;
+      /* full-bleed across the viewport */
+      width:100vw;
+      max-width:none;
+      margin-top:8px; /* bring closer to selection image */
+      margin-left: calc(50% - 50vw);
+      margin-right: calc(50% - 50vw);
+      border-radius:0; /* flush to edges */
+      object-fit:cover;
+      box-shadow:none;
+
+      /* allow transform-based parallax */
+      will-change: transform;
+      transform: translateY(0);
+    }
+    /* gnome image styling (same as collage) */
+    .gnome-image {
+      display: block;
+      width: 100vw;
+      max-width: none;
+      margin-top: -200px; /* remove gap between collage and gnome */
+      margin-left: calc(50% - 50vw);
+      margin-right: calc(50% - 50vw);
+      border-radius: 0;
+      object-fit: cover;
+      box-shadow: none;
+      will-change: transform;
+      transform: translateY(0);
+    }
+    /* banner section with overlay title */
+    .banner-section {
+      position: relative;
+      width: 100vw;
+      max-width: none;
+      margin-top: -200px;
+      margin-left: calc(50% - 50vw);
+      margin-right: calc(50% - 50vw);
+    }
+    .banner-section img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+    }
+    .banner-title {
+      position: absolute;
+      left: 1.25rem;
+      top: 40%;
+      transform: translateY(-50%);
+      color: #fff;
+      text-align: left;
+      z-index: 30;
+      pointer-events: none;
+      text-shadow: 0 6px 18px rgba(0,0,0,0.6);
+      max-width: 35%;
+    }
+    .banner-title h2 {
+      margin: 0 0 0.75rem 0;
+      font-size: clamp(1.25rem, 2.6vw, 2rem);
+      line-height: 1.5;
+      font-family: "ofelia-text", sans-serif;
+      font-weight: 600;
+    }
+    .banner-title .byline { margin-top: 0.6rem; margin-bottom: 0.45rem; font-size: clamp(0.85rem, 1.6vw, 1rem); color: rgba(255,255,255,0.95); line-height: 1.6; }
+    .banner-title .meta { margin-top: 0.6rem; margin-bottom: 0.45rem; font-size: 0.85rem; color: rgba(255,255,255,0.8); line-height: 1.6; }
+    .banner-title .synopsis { margin-top: 1rem; font-size: clamp(0.85rem, 1.4vw, 1rem); color: rgba(255,255,255,0.9); line-height: 1.75; }
+
+    /* ensure header sits above the hero (header injection keeps z-index) */
+    .hero{z-index:10}
+
+    /* overlay stars image above the hero background */
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: url('/public/media/stars.webp');
+      /* make the stars image smaller (adjust percent as needed) */
+      background-size: 60% auto;
+      background-position: center;
+      background-repeat: no-repeat;
+      opacity: 0.85; /* adjust to taste */
+      pointer-events: none;
+      mix-blend-mode: screen; /* optional; try 'normal' if undesired */
+      z-index: 1;
+    }
+
+    /* ensure any hero children (none currently) sit above the overlay */
+    .hero > * { position: relative; z-index: 2; }
+
+    /* new: styling for selection image shown under the trailer */
+    .selection-image{
+      display:block;
+      width:100%;
+      max-width:1100px;
+      margin: 200px auto 0; /* more space between trailer and selections */
+      border-radius:.5rem;
+      object-fit:cover;
+      box-shadow:0 10px 30px rgba(0,0,0,0.6);
+      position:relative;
+      z-index:10;
+      will-change: transform, opacity, filter; /* allow hardware-accelerated transforms + fades */
+      opacity: 0;
+      filter: blur(8px);
+      transition: opacity 5s cubic-bezier(.2,.9,.2,1), filter 3s cubic-bezier(.2,.9,.2,1); /* slower fade */
+    }
+    /* visible state: fade in and remove blur */
+    .selection-image.in-view { opacity:1; filter: none; }
+
+    /* new: single collage image under selections */
+    .collage-image{
+      display:block;
+      /* full-bleed across the viewport */
+      width:100vw;
+      max-width:none;
+      margin-top:8px; /* bring closer to selection image */
+      margin-left: calc(50% - 50vw);
+      margin-right: calc(50% - 50vw);
+      border-radius:0; /* flush to edges */
+      object-fit:cover;
+      box-shadow:none;
+
+      /* allow transform-based parallax */
+      will-change: transform;
+      transform: translateY(0);
+    }
+    /* gnome image styling (same as collage) */
+    .gnome-image {
+      display: block;
+      width: 100vw;
+      max-width: none;
+      margin-top: -200px; /* remove gap between collage and gnome */
+      margin-left: calc(50% - 50vw);
+      margin-right: calc(50% - 50vw);
+      border-radius: 0;
+      object-fit: cover;
+      box-shadow: none;
+      will-change: transform;
+      transform: translateY(0);
+    }
+    /* banner section with overlay title */
+    .banner-section {
+      position: relative;
+      width: 100vw;
+      max-width: none;
+      margin-top: -200px;
+      margin-left: calc(50% - 50vw);
+      margin-right: calc(50% - 50vw);
+    }
+    .banner-section img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+    }
+    .banner-title {
+      position: absolute;
+      left: 1.25rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #fff;
+      text-align: left;
+      z-index: 30;
+      pointer-events: none;
+      text-shadow: 0 6px 18px rgba(0,0,0,0.6);
+      max-width: 35%;
+    }
+    .banner-title h2 {
+      margin: 0 0 0.75rem 0;
+      font-size: clamp(1.25rem, 2.6vw, 2rem);
+      line-height: 1.5;
+      font-family: "ofelia-text", sans-serif;
+      font-weight: 600;
+    }
+    .banner-title .byline { margin-top: 0.6rem; margin-bottom: 0.45rem; font-size: clamp(0.85rem, 1.6vw, 1rem); color: rgba(255,255,255,0.95); line-height: 1.6; }
+    .banner-title .meta { margin-top: 0.6rem; margin-bottom: 0.45rem; font-size: 0.85rem; color: rgba(255,255,255,0.8); line-height: 1.6; }
+    .banner-title .synopsis { margin-top: 1rem; font-size: clamp(0.85rem, 1.4vw, 1rem); color: rgba(255,255,255,0.9); line-height: 1.75; }
+
+    /* ensure header sits above the hero (header injection keeps z-index) */
+    .hero{z-index:10}
+
+    /* overlay stars image above the hero background */
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: url('/public/media/stars.webp');
+      /* make the stars image smaller (adjust percent as needed) */
+      background-size: 60% auto;
+      background-position: center;
+      background-repeat: no-repeat;
+      opacity: 0.85; /* adjust to taste */
+      pointer-events: none;
+      mix-blend-mode: screen; /* optional; try 'normal' if undesired */
+      z-index: 1;
+    }
+
+    /* ensure any hero children (none currently) sit above the overlay */
+    .hero > * { position: relative; z-index: 2; }
+
+    /* new: styling for selection image shown under the trailer */
+    .selection-image{
+      display:block;
+      width:100%;
+      max-width:1100px;
+      margin: 200px auto 0; /* more space between trailer and selections */
+      border-radius:.5rem;
+      object-fit:cover;
+      box-shadow:0 10px 30px rgba(0,0,0,0.6);
+      position:relative;
+      z-index:10;
+      will-change: transform, opacity, filter; /* allow hardware-accelerated transforms + fades */
+      opacity: 0;
+      filter: blur(8px);
+      transition: opacity 5s cubic-bezier(.2,.9,.2,1), filter 3s cubic-bezier(.2,.9,.2,1); /* slower fade */
+    }
+    /* visible state: fade in and remove blur */
+    .selection-image.in-view { opacity:1; filter: none; }
+
+    /* new: single collage image under selections */
+    .collage-image{
+      display:block;
+      /* full-bleed across the viewport */
+      width:100vw;
+      max-width:none;
+      margin-top:8px; /* bring closer to selection image */
+      margin-left: calc(50% - 50vw);
+      margin-right: calc(50% - 50vw);
+      border-radius:0; /* flush to edges */
+      object-fit:cover;
+      box-shadow:none;
+
+      /* allow transform-based parallax */
+      will-change: transform;
+      transform: translateY(0);
+    }
+    /* gnome image styling (same as collage) */
+    .gnome-image {
+      display: block;
+      width: 100vw;
+      max-width: none;
+      margin-top: -200px; /* remove gap between collage and gnome */
+      margin-left: calc(50% - 50vw);
+      margin-right: calc(50% - 50vw);
+      border-radius: 0;
+      object-fit: cover;
+      box-shadow: none;
+      will-change: transform;
+      transform: translateY(0);
+    }
 
     /* bio section: photo left, text right; stacks on small screens */
     .bio-section {
@@ -156,7 +500,7 @@
       width: 440px;
       height: auto;        /* allow natural image height (not square) */
       overflow: visible;   /* allow image to determine its height */
-      border-radius: .5rem;
+      border-radius: 1rem;
       background: #0b0b0b;
       box-shadow: 0 10px 30px rgba(0,0,0,0.45);
 
@@ -176,6 +520,7 @@
       height: auto;   /* preserve original aspect ratio */
       object-fit: contain;
       display: block;
+      border-radius: 0.7rem; /* round corners on the image */
     }
     /* BTS image shown directly under the main portrait, same width */
     .bts-photo {
@@ -302,6 +647,17 @@
 
       <!-- Collage image placed under selections -->
       <img src="/public/media/Collage.webp" alt="Collage of stills" class="collage-image">
+
+      <!-- Banner section with overlay title -->
+      <div class="banner-section">
+        <img src="/public/media/banner2.png" alt="Banner" class="gnome-image">
+        <div class="banner-title video-title" aria-label="Trailer details">
+          <h2>THE STORY</h2>
+          <p class="meta">the origins of Little Things</p>
+          <p class="synopsis">Looking to his family for guidance, young Leftie moves through the world with a restless curiosity, trying to find his place in a confusing world. Told through a childhood lens, the film pairs the quiet beauty of the French countryside with the very real, often invisible anxieties of growing up.</p>
+          <p class="synopsis">Written, directed, shot, and edited by Noam Rignault Clement, the story was shaped by Noam’s own experience as a French-American with learning disabilities. This film marks Noam’s fourth festival-selected short and his second collaboration with his younger brother in a leading role.</p>
+        </div>
+      </div>
 
        <!-- Bio: Noam section (image left, text right) -->
       <section class="bio-section" aria-labelledby="bio-title">
