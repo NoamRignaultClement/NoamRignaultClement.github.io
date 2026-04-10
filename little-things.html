@@ -381,13 +381,14 @@
       letter-spacing: 0.02em;
     }
     @media (max-width: 768px) {
-      .bio-section { flex-direction: column-reverse; gap: 16px; margin: 18px auto 0; align-items: center; transform: none; }
+      .hero::after { background-size: 90% auto; } /* ← larger stars on mobile */
+      .bio-section { flex-direction: column-reverse; gap: 16px; margin: 18px auto 0; align-items: center; transform: none; } /* center on mobile; reverse order so director text appears above awards */
       .bio-photo { width: 100%; height: auto; }
       .bio-photo img { height: 100%; }
       .bio-text h3 { font-size: clamp(1.0rem, 3.2vw, 1.25rem); }
-      .bio-text p { font-size: clamp(0.78rem, 1.05vw, 0.9rem); } /* ← match bio-extra-left p size */
-      .bio-extra-left { text-align: left; }
-      .bts-photo { margin-top: 0; }
+      .bio-text p { font-size: clamp(0.85rem, 2.6vw, 1rem); }
+      .bio-extra-left { text-align: left; } /* reset text alignment to left on mobile */
+      .bts-photo { margin-top: 0; } /* remove top margin on mobile */
       .bts-photo { display: none; } /* hide BTS image on mobile */
       .banner-title h2 { font-size: clamp(0.9rem, 1.8vw, 1.25rem); } /* smaller heading on mobile */
       .banner-title .byline { font-size: clamp(0.65rem, 1.2vw, 0.8rem); } /* smaller byline on mobile */
@@ -399,6 +400,7 @@
       .video-title .meta { font-size: clamp(0.65rem, 1.0vw, 0.75rem); } /* ← smaller meta on mobile for trailer */
       .video-title .synopsis { font-size: clamp(0.7rem, 1.1vw, 0.85rem); } /* ← smaller synopsis on mobile for trailer */
       .play-btn .circle { width: 60px; height: 60px; } /* ← smaller circle on mobile */
+      .gnome-image { margin-top: 0; height: 400px; } /* ← larger banner on mobile */
     }
   </style>
 </head>
