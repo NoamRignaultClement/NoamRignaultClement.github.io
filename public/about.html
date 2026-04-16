@@ -15,13 +15,108 @@
         /* Layout fix for fixed header */
         body { padding-top: 88px; }
         
-        /* Increase spacing between lines in About section */
-        .about-text p {
-            line-height: 2.2;    /* increased line spacing */
-            margin-bottom: 1.25rem; /* extra space between paragraphs */
+        /* Bio section styling (copied from little-things.html) */
+        .bio-section {
+          display: flex;
+          gap: 28px;
+          align-items: flex-start;
+          justify-content: center;
+          max-width: 1100px;
+          margin: 0 auto;
+          padding: 0 2rem;
+          transform: none;
+          transition: none;
+        }
+        .bio-photo {
+          flex: 0 0 440px;
+          width: 440px;
+          height: auto;
+          overflow: visible;
+          border-radius: 1rem;
+          background: #0b0b0b;
+          box-shadow: 0 10px 30px rgba(0,0,0,0.45);
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
+          will-change: transform;
+          transform: translateY(0);
+          position: relative;
+          z-index: 30;
+        }
+        .bio-photo img {
+          width: 100%;
+          height: auto;
+          object-fit: contain;
+          display: block;
+          border-radius: 0.7rem;
+        }
+        .bts-photo {
+          width: 100%;
+          height: auto;
+          display: block;
+          border-radius: .5rem;
+          box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+          object-fit: cover;
+          margin-top: 50px;
+        }
+        .bio-text {
+          will-change: transform;
+          transform: translateY(0);
+          position: relative;
+          z-index: 31;
+          flex: 0 0 420px;
+          max-width: 420px;
+          min-width: 260px;
+          text-align: left;
+          text-shadow: 0 6px 18px rgba(0,0,0,0.6);
+          color: #fff;
+        }
+        .bio-text h3 {
+          margin: 0 0 0.6rem 0;
+          font-family: "ofelia-text", sans-serif;
+          font-weight: 600;
+          font-size: clamp(1.0rem, 1.8vw, 1.4rem);
+          line-height: 1.35;
+          color: #ffffff;
+        }
+        .bio-text .roles {
+          display: block;
+          margin-top: 0.4rem;
+          margin-bottom: 0.35rem;
+          font-size: clamp(0.75rem, 1.2vw, 0.9rem);
+          color: rgba(255,255,255,0.95);
+          font-weight: 600;
+          letter-spacing: 0;
+        }
+        .bio-text p {
+          margin-top: 0.9rem;
+          margin-bottom: 0.7rem;
+          font-size: clamp(0.78rem, 1.05vw, 0.9rem);
+          color: rgba(255,255,255,0.9);
+          line-height: 1.9;
+        }
+        .bio-extra-left p {
+          margin-top: 0.9rem;
+          margin-bottom: 0.7rem;
+          font-size: clamp(0.78rem, 1.05vw, 0.9rem);
+          color: rgba(255,255,255,0.9);
+          line-height: 1.9;
+          text-shadow: 0 6px 18px rgba(0,0,0,0.6);
+        }
+        .bio-extra-left {
+          text-align: right;
+        }
+        .bio-text .meta {
+          display: block;
+          margin-top: 0.35rem;
+          margin-bottom: 0.6rem;
+          font-size: clamp(0.65rem, 0.9vw, 0.78rem);
+          color: rgba(255,255,255,0.58);
+          font-weight: 500;
+          letter-spacing: 0.02em;
         }
 
-        /* Header Classes for scroll logic (copied from index) */
+        /* Header Classes for scroll logic */
         header { transition: opacity .6s ease, transform .6s ease; }
         .header-fade { opacity:0; transform:translateY(-12px); pointer-events:none; } 
     </style>
@@ -63,25 +158,28 @@
     <!-- HEADER INTEGRATION END -->
 
     <main class="px-4 md:px-8 min-h-[calc(100vh-88px)] flex items-center justify-center">
-        <section class="max-w-7xl w-full mx-auto flex flex-col md:flex-row items-center md:items-center md:justify-center md:space-x-12">
-            <!-- Left: Headshot -->
-            <figure class="md:w-5/12 w-full mb-10 md:mb-0 flex justify-center">
-                <div class="w-[600px] md:w-[600px] bg-black rounded-lg overflow-hidden ring-2 ring-gray-700 shadow-lg flex items-center justify-center group">
-                    <!-- FIX: Absolute path for image -->
-                    <img src="/public/media/NoamHeadshot.jpg" alt="NoamHeadshot" class="w-full h-full object-cover transform transition-transform duration-500 ease-out group-hover:scale-110 [will-change:transform]">
+        <section class="max-w-7xl w-full mx-auto mt-24">
+            <div class="bio-section">
+                <!-- Left: Portrait -->
+                <div class="bio-photo">
+                    <img src="/public/media/Noam.webp" alt="Noam Rignault Clement portrait">
+                    <!-- Awards/credits block under portrait -->
+                    <div class="bio-extra-left">
+                        <p>Noam's short, "The Wooden Heart" (2024), which he also wrote, directed, filmed, and edited, won Best Short Film at the 2025 NATAS National Student Production Awards (NATAS is also the organization behind the Emmy® Awards), the Best Drama Award from the 2025 Student Television Network: Film Excellence competition, and an Exceptional Award from the 2025 Bay Area Creative Youth competition.</p>
+                        <p>"The Buttercup Mafia" (2025), which Noam wrote, directed, and edited, earned him a Best Director nomination at the 2025 All American High School Film Festival and was screened at the 2025 Mill Valley Film Festival. Noam was also an Emerging Talent nominee at the 2024 All-American High School Film Festival for his first film, "Fragments" (2024), which he wrote, directed, and edited.</p>
+                        <p>Noam is an active member of the UC Berkeley Business and Film Association (BAFA), and the Special Projects Group (SPG) as part of the UC Berkeley Cinematic Arts and Production Studios. He also works on commercial projects with San Francisco-based companies. He is an alum of the UCLA Cinematography Summer Institute and the Marin School of the Arts program.</p>
+                    </div>
                 </div>
-                <figcaption class="sr-only">HeadshotPlaceholder</figcaption>
-            </figure>
-            <!-- Right: Text content -->
-            <div class="md:w-6/12 w-full text-center md:text-left about-text max-w-md md:max-w-lg">
-                <img src="media/About.png" alt="About" class="mx-auto md:mx-0 mb-6 w-[60%] md:w-[30%] h-auto">
-                <p class="text-sm text-gray-400 mb-5 uppercase">
-                <span class="text-white">Noam Rignault Clement</span> is a French-American 18-year-old filmmaker who attends <span class="text-white">UC Berkeley</span>. With a focus on freelance <span class="text-white">commercial work</span> and <span class="text-white">narrative films</span>, Noam implements his various skills in cinematography, editing,
-                 directing, and writing into his work.
-                </p>
-                <p class="text-sm text-gray-400 mb-5 uppercase">
-                The strongest themes present in Noam’s narrative films are the themes of childhood and growing up. His films that feature these ideas most prominently include <span class="text-white">Little Things</span> (2025), <span class="text-white">The Buttercup Mafia</span> (2025), <span class="text-white">The Wooden Heart</span> (2024), and <span class="text-white">Fragments</span> (2024).
-                </p>
+                <!-- Right: Bio Text -->
+                <div class="bio-text">
+                    <h3>ABOUT</h3>
+                    <p class="roles">Noam Rignault Clement</p>
+                    <p class="meta">director | writer | cinematographer | editor | actor</p>
+                    <p>Noam Rignault Clement is an 18-year-old French-American filmmaker and actor attending UC Berkeley. His narrative work, which explores the complexities of childhood, growing up, neurodivergence, and multiculturalism, has received multiple awards and nominations.</p>
+                    <p>His latest short film, "Little Things" (2025), which he wrote, directed, filmed, and edited, is being screened at the 2026 San Francisco International Film Festival and was presented at the 2026 National Film Festival for Talented Youth (NFFTY).</p>
+                    <p>Noam is currently in pre-production for his next short film "it ends with snails," which touches on social justice and untangling interconnected lives through a childhood lens. He is actively seeking partners to bring his vision to life.</p>
+                    <img src="/public/media/BTS.JPG" alt="Behind the scenes" class="bts-photo">
+                </div>
             </div>
         </section>
     </main>
